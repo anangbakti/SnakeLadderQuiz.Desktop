@@ -13,6 +13,9 @@ namespace SnakeLadderQuiz.Desktop
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        int millisecondsPerFrame = 500; //Update every 1 second
+        double timeSinceLastUpdate = 0; //Accumulate the elapsed time
+
         private Texture2D background;        
         private List<Rectangle> rects = new List<Rectangle>();
         private List<Texture2D> textureRects = new List<Texture2D>();
@@ -104,8 +107,26 @@ namespace SnakeLadderQuiz.Desktop
             {
                 // do something here
                 // sample move
-                players[0].Vector2 = new Vector2(rects[10].X, rects[10].Y);
+                //players[0].Vector2 = new Vector2(rects[10].X, rects[10].Y);
+
+                players[0].PositionDestination = 10;
             }
+
+            // slowdown logic 
+            timeSinceLastUpdate += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timeSinceLastUpdate >= millisecondsPerFrame)
+            {
+                timeSinceLastUpdate = 0;
+
+                //YOUR GAMES LOGIC GOES HERE
+                var playerNeedToWalks = players.Find(i => i.IsInPositionDestination() == false);
+                if (playerNeedToWalks != null)
+                {
+                    SetPositionPlayer(playerNeedToWalks, playerNeedToWalks.Position + 1);
+                }
+            }
+
+            
 
             System.GC.Collect();
             
@@ -201,12 +222,13 @@ namespace SnakeLadderQuiz.Desktop
         private void initFirstMoveAllPlayer() {
             foreach (var player in players)
             {
-                SetPositionPlayer(rects[0], player);
+                SetPositionPlayer(player, 0);
             }
         }
 
-        private void SetPositionPlayer(Rectangle rect, Player player)
+        private void SetPositionPlayer(Player player, int position)
         {
+            var rect = rects[position];
             if (player.Id == 0)
             {
                 player.Vector2 = new Vector2(rect.X, rect.Y);
@@ -227,6 +249,9 @@ namespace SnakeLadderQuiz.Desktop
             {
                 player.Vector2 = new Vector2(rect.X+20, rect.Y+11);
             }
+
+            //update position player
+            player.Position = position;
         }
 
         public class Player
@@ -236,22 +261,28 @@ namespace SnakeLadderQuiz.Desktop
             {
                 Position = 0;
                 PositionDestination = 0;
-                PlayerMode = Player.Mode.Stop;
+                //PlayerMode = Player.Mode.Stop;
                 this.Id = Id;
             }
 
             public int Id { get; set; }
 
-            public enum Mode
-            {
-                Stop,
-                Walking
-            }
+            //public enum Mode
+            //{
+            //    Stop,
+            //    Walking
+            //}
 
             public Texture2D Texture2D { get; set; }
             public Vector2 Vector2 { get; set; }
+            /// <summary>
+            /// start from 0
+            /// </summary>
             public int Position { get; set; }
-            public Mode PlayerMode { get; set; }
+            //public Mode PlayerMode { get; set; }
+            /// <summary>
+            /// start from 0
+            /// </summary>
             public int PositionDestination { get; set; }
             public bool IsInPositionDestination()
             {
