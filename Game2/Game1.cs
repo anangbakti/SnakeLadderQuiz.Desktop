@@ -149,7 +149,20 @@ namespace SnakeLadderQuiz.Desktop
                 //YOUR GAMES LOGIC GOES HERE 
                 if (playerNeedToWalks != null)
                 {
-                    SetPositionPlayer(playerNeedToWalks, playerNeedToWalks.Position + 1);                    
+                    int nextPosition = playerNeedToWalks.Position + 1;
+
+                    // change destination
+                    if (nextPosition == playerNeedToWalks.PositionDestination)
+                    {
+                        int? moveUpDownPosition = PlayerNeedToMoveUpDown(playerNeedToWalks);
+                        if (moveUpDownPosition.HasValue)
+                        {
+                            playerNeedToWalks.PositionDestination = moveUpDownPosition.Value;
+                            nextPosition = moveUpDownPosition.Value;
+                        }
+                    }
+
+                    SetPositionPlayer(playerNeedToWalks, nextPosition);
                 }
 
                 System.GC.Collect();
@@ -157,6 +170,8 @@ namespace SnakeLadderQuiz.Desktop
 
             base.Update(gameTime);
         }
+
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -252,6 +267,19 @@ namespace SnakeLadderQuiz.Desktop
                 player.LastWalkIsMe = false;
             }
             players[new Random().Next(0,4)].LastWalkIsMe = true;
+        }
+
+        private int? PlayerNeedToMoveUpDown(Player player) {
+            int? resultPosition = null;
+            if (ruleUps.ContainsKey(player.Position + 1))
+            {
+                resultPosition = ruleUps[player.Position + 1] - 1;
+            }
+            else if (ruleDowns.ContainsKey(player.Position + 1))
+            {
+                resultPosition = ruleDowns[player.Position + 1] - 1;
+            }
+            return resultPosition;
         }
 
         private void SetPositionPlayer(Player player, int position)
