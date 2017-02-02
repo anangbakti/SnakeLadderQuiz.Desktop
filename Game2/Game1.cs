@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace SnakeLadderQuiz.Desktop
 {
@@ -13,7 +14,7 @@ namespace SnakeLadderQuiz.Desktop
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        int millisecondsPerFrame = 500; //Update every 1 second
+        int millisecondsPerFrame = 300; //Update every 1 second
         double timeSinceLastUpdate = 0; //Accumulate the elapsed time
 
         private Texture2D background;        
@@ -22,7 +23,7 @@ namespace SnakeLadderQuiz.Desktop
         private Color rectColor;
 
         private List<Player> players = new List<Player>(5);
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -40,7 +41,7 @@ namespace SnakeLadderQuiz.Desktop
                 players.Add(player);
             }
             
-        }
+        }        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -75,7 +76,7 @@ namespace SnakeLadderQuiz.Desktop
 
             CreateListOfTextureRect();
 
-            initFirstMoveAllPlayer();
+            InitFirstMoveAllPlayer();
         }
 
         /// <summary>
@@ -97,19 +98,26 @@ namespace SnakeLadderQuiz.Desktop
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            
+
             // Allows the game to exit
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             //    this.Exit();
-            
-            KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.Enter))
-            {
-                // do something here
-                // sample move
-                //players[0].Vector2 = new Vector2(rects[10].X, rects[10].Y);
-
-                players[0].PositionDestination = 10;
+            var playerNeedToWalks = players.Find(i => i.IsInPositionDestination() == false);
+            if (playerNeedToWalks == null) {
+                KeyboardState state = Keyboard.GetState();
+                if (state.IsKeyDown(Keys.Enter))
+                {
+                    if (AnyoneWin())
+                    {
+                        InitFirstMoveAllPlayer();
+                    }
+                    else {
+                        // who's turn to walk now?
+                        var player = WhoIsNextPlayerToWalk();
+                        // hei player, you go to destination now!                    
+                        player.PositionDestination = player.Position + RollTheDice();
+                    }
+                }
             }
 
             // slowdown logic 
@@ -118,18 +126,15 @@ namespace SnakeLadderQuiz.Desktop
             {
                 timeSinceLastUpdate = 0;
 
-                //YOUR GAMES LOGIC GOES HERE
-                var playerNeedToWalks = players.Find(i => i.IsInPositionDestination() == false);
+                //YOUR GAMES LOGIC GOES HERE 
                 if (playerNeedToWalks != null)
                 {
-                    SetPositionPlayer(playerNeedToWalks, playerNeedToWalks.Position + 1);
+                    SetPositionPlayer(playerNeedToWalks, playerNeedToWalks.Position + 1);                    
                 }
+
+                System.GC.Collect();
             }
 
-            
-
-            System.GC.Collect();
-            
             base.Update(gameTime);
         }
 
@@ -219,11 +224,14 @@ namespace SnakeLadderQuiz.Desktop
             }
         }
 
-        private void initFirstMoveAllPlayer() {
+        private void InitFirstMoveAllPlayer() {
             foreach (var player in players)
             {
                 SetPositionPlayer(player, 0);
+                player.PositionDestination = 0;
+                player.LastWalkIsMe = false;
             }
+            players[new Random().Next(0,4)].LastWalkIsMe = true;
         }
 
         private void SetPositionPlayer(Player player, int position)
@@ -254,41 +262,87 @@ namespace SnakeLadderQuiz.Desktop
             player.Position = position;
         }
 
-        public class Player
+        private Player WhoIsNextPlayerToWalk()
         {
+            Player playerLastWalkIsMe;
 
-            public Player(int Id)
+            Player player = players.Find(i => i.LastWalkIsMe == true);
+            player.LastWalkIsMe = false;
+
+            if (player.Id == 4)
             {
-                Position = 0;
-                PositionDestination = 0;
-                //PlayerMode = Player.Mode.Stop;
-                this.Id = Id;
+                playerLastWalkIsMe = players[0];
+            }
+            else
+            {
+                playerLastWalkIsMe = players.Find(i => i.Id == player.Id + 1);
             }
 
-            public int Id { get; set; }
-
-            //public enum Mode
-            //{
-            //    Stop,
-            //    Walking
-            //}
-
-            public Texture2D Texture2D { get; set; }
-            public Vector2 Vector2 { get; set; }
-            /// <summary>
-            /// start from 0
-            /// </summary>
-            public int Position { get; set; }
-            //public Mode PlayerMode { get; set; }
-            /// <summary>
-            /// start from 0
-            /// </summary>
-            public int PositionDestination { get; set; }
-            public bool IsInPositionDestination()
-            {
-                return Position == PositionDestination;
-            }
+            playerLastWalkIsMe.LastWalkIsMe = true;
+            return playerLastWalkIsMe;
         }
 
+        private int RollTheDice()
+        {
+            return new Random().Next(1, 12);
+        }
+
+        private bool AnyoneWin() {
+            return players.Find(i => i.Position == 99) != null;
+        }
+    }
+
+
+    public class Player
+    {
+
+        public Player(int Id)
+        {
+            Position = 0;
+            PositionDestination = 0;
+            //PlayerMode = Player.Mode.Stop;
+            LastWalkIsMe = false;
+            this.Id = Id;
+        }
+
+        private int _positionDestination;
+
+        public int Id { get; set; }
+
+        //public enum Mode
+        //{
+        //    Stop,
+        //    Walking
+        //}
+
+        public Texture2D Texture2D { get; set; }
+        public Vector2 Vector2 { get; set; }
+        /// <summary>
+        /// start from 0
+        /// </summary>
+        public int Position { get; set; }
+
+        public bool LastWalkIsMe { get; set; }
+
+        //public Mode PlayerMode { get; set; }
+        /// <summary>
+        /// start from 0
+        /// </summary>
+        public int PositionDestination
+        {
+            get { return _positionDestination; }
+            set
+            {
+                if (value > 99)
+                {
+                    value = 99;
+                }
+                _positionDestination = value;
+            }
+        }
+        public bool IsInPositionDestination()
+        {
+            return Position == PositionDestination;
+        }
     }
 }
