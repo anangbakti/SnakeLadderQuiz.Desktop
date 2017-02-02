@@ -20,7 +20,16 @@ namespace SnakeLadderQuiz.Desktop
             InitializeComponent();
 
             _game1 = new Game1();
+            _game1.FinishWalk += FinishWalk;
+
             this.Load += new EventHandler(FormMain_Load);
+        }
+
+        private void FinishWalk() {
+            this.Invoke((MethodInvoker)delegate
+            {
+                cmdStart.Enabled = true;
+            });                
         }
 
         private void FormMain_Load(object sender, System.EventArgs e)
@@ -32,8 +41,8 @@ namespace SnakeLadderQuiz.Desktop
         {
             if (_game1 != null)
             {
-
                 _game1.RaiseStart = true;
+                cmdStart.Enabled = false;
             }
         }
 

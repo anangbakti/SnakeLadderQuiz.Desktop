@@ -27,6 +27,8 @@ namespace SnakeLadderQuiz.Desktop
         public bool RaiseStart = false;
         public bool RaiseReset = false;
 
+        public Action FinishWalk;
+
         private Dictionary<int, int> ruleUps = new Dictionary<int, int> {
             { 6, 16 },
             { 9, 31 },
@@ -174,6 +176,10 @@ namespace SnakeLadderQuiz.Desktop
                     nextPosition = ChangePositionUpDown(nextPosition, playerNeedToWalks);
 
                     SetPositionPlayer(playerNeedToWalks, nextPosition);
+                }
+                else
+                {
+                    FinishWalk?.Invoke();
                 }
 
                 System.GC.Collect();
