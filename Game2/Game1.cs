@@ -14,7 +14,7 @@ namespace SnakeLadderQuiz.Desktop
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        int millisecondsPerFrame = 300; //Update every 1 second
+        int millisecondsPerFrame = 300; //Update every 300 ms
         double timeSinceLastUpdate = 0; //Accumulate the elapsed time
 
         private Texture2D background;        
@@ -23,6 +23,26 @@ namespace SnakeLadderQuiz.Desktop
         private Color rectColor;
 
         private List<Player> players = new List<Player>(5);
+
+        private Dictionary<int, int> ruleUps = new Dictionary<int, int> {
+            { 6, 16 },
+            { 9, 31 },
+            { 19, 38 },
+            { 21, 79 },
+            { 28, 84 },
+            { 52, 67 },
+            { 72, 93 },
+            { 80, 100 },
+        };
+        private Dictionary<int, int> ruleDowns = new Dictionary<int, int> {
+            { 43 ,23 },
+            { 49, 33 },
+            { 56, 26 },
+            { 65, 57 },
+            { 88, 53 },
+            { 92, 71 },
+            { 99, 35 }
+        };
         
         public Game1()
         {
