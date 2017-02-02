@@ -22,7 +22,10 @@ namespace SnakeLadderQuiz.Desktop
         private List<Texture2D> textureRects = new List<Texture2D>();
         private Color rectColor;
 
-        private List<Player> players = new List<Player>(5);
+        public List<Player> players = new List<Player>(5);
+
+        public bool RaiseStart = false;
+        public bool RaiseReset = false;
 
         private Dictionary<int, int> ruleUps = new Dictionary<int, int> {
             { 6, 16 },
@@ -126,12 +129,15 @@ namespace SnakeLadderQuiz.Desktop
             var playerNeedToWalks = players.Find(i => i.IsInPositionDestination() == false);
             if (playerNeedToWalks == null)
             {
-                KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.Enter))
-                {
+                //KeyboardState state = Keyboard.GetState();
+                //if (state.IsKeyDown(Keys.Enter))
+                if (RaiseStart)
+                {                
+                    RaiseStart = false;
                     if (AnyoneWin())
                     {
                         InitFirstMoveAllPlayer();
+                        // stop all moves
                         players.ForEach(i => i.LastWalkIsMe = false);
                     }
                     else
@@ -145,8 +151,10 @@ namespace SnakeLadderQuiz.Desktop
                     }
                 }
 
-                if (state.IsKeyDown(Keys.S))
+                //if (state.IsKeyDown(Keys.S))
+                if (RaiseReset)
                 {
+                    RaiseReset = false;
                     InitFirstMoveAllPlayer();
                 }
             }
@@ -193,16 +201,24 @@ namespace SnakeLadderQuiz.Desktop
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            try
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here            
-            spriteBatch.Begin();
-            spriteBatch.Draw(background, new Rectangle(0, 0, 800, 600), Color.White);
-            DrawEachBoxInSnakeLadder();
-            DrawEachPlayer();
-            spriteBatch.End();
+                // TODO: Add your drawing code here            
+                spriteBatch.Begin();
+                spriteBatch.Draw(background, new Rectangle(0, 0, 800, 600), Color.White);
+                DrawEachBoxInSnakeLadder();
+                DrawEachPlayer();
+                spriteBatch.End();
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
+            }
+            catch (Exception)
+            {
+                
+            }
+            
         }
         
         private void CreateListOfRectangle() {

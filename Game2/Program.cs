@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace SnakeLadderQuiz.Desktop
 {
@@ -14,8 +15,23 @@ namespace SnakeLadderQuiz.Desktop
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            //using (var game = new Game1())
+            //{
+                try
+                {
+                    Form frm = new FormMain();
+                    Application.Run(frm);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+               
+                //game.Run();
+                
+            //}
+                
         }
     }
 #endif
