@@ -30,7 +30,7 @@ namespace SnakeLadderQuiz.Desktop
             { 19, 38 },
             { 21, 79 },
             { 28, 84 },
-            { 52, 67 },
+            { 51, 67 },
             { 72, 93 },
             { 80, 100 },
         };
@@ -132,15 +132,22 @@ namespace SnakeLadderQuiz.Desktop
                     if (AnyoneWin())
                     {
                         InitFirstMoveAllPlayer();
+                        players.ForEach(i => i.LastWalkIsMe = false);
                     }
                     else
                     {
                         // who's turn to walk now?
                         var player = WhoIsNextPlayerToWalk();
-                        // hei player, you go to destination now!                    
-                        player.PositionDestination = player.Position + RollTheDice();
-                        //player.PositionDestination = 5;
+                        if (player != null) {
+                            // hei player, you go to destination now!                    
+                            player.PositionDestination = player.Position + RollTheDice();
+                        }
                     }
+                }
+
+                if (state.IsKeyDown(Keys.S))
+                {
+                    InitFirstMoveAllPlayer();
                 }
             }
 
@@ -155,17 +162,8 @@ namespace SnakeLadderQuiz.Desktop
                 if (playerNeedToWalks != null)
                 {
                     int nextPosition = playerNeedToWalks.Position + 1;
-
                     // change destination
-                    if (nextPosition == playerNeedToWalks.PositionDestination)
-                    {
-                        int? moveUpDownPosition = PlayerNeedToMoveUpDown(playerNeedToWalks);
-                        if (moveUpDownPosition.HasValue)
-                        {
-                            playerNeedToWalks.PositionDestination = moveUpDownPosition.Value;
-                            nextPosition = moveUpDownPosition.Value;
-                        }
-                    }
+                    nextPosition = ChangePositionUpDown(nextPosition, playerNeedToWalks);
 
                     SetPositionPlayer(playerNeedToWalks, nextPosition);
                 }
@@ -176,7 +174,18 @@ namespace SnakeLadderQuiz.Desktop
             base.Update(gameTime);
         }
 
-
+        private int  ChangePositionUpDown(int nextPosition, Player playerNeedToWalks) {            
+            if (nextPosition == playerNeedToWalks.PositionDestination)
+            {
+                int? moveUpDownPosition = PlayerNeedToMoveUpDown(playerNeedToWalks);
+                if (moveUpDownPosition.HasValue)
+                {
+                    playerNeedToWalks.PositionDestination = moveUpDownPosition.Value;
+                    nextPosition = moveUpDownPosition.Value;
+                }
+            }
+            return nextPosition;
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -271,7 +280,11 @@ namespace SnakeLadderQuiz.Desktop
                 player.PositionDestination = 0;
                 player.LastWalkIsMe = false;
             }
-            players[new Random().Next(0,4)].LastWalkIsMe = true;
+            RandomizeStartPlayer().LastWalkIsMe = true;
+        }
+
+        private Player RandomizeStartPlayer() {
+            return players[new Random().Next(0, 4)];
         }
 
         private int? PlayerNeedToMoveUpDown(Player player) {
@@ -317,21 +330,25 @@ namespace SnakeLadderQuiz.Desktop
 
         private Player WhoIsNextPlayerToWalk()
         {
-            Player playerLastWalkIsMe;
+            Player playerLastWalkIsMe = null;
 
             Player player = players.Find(i => i.LastWalkIsMe == true);
-            player.LastWalkIsMe = false;
 
-            if (player.Id == 4)
-            {
-                playerLastWalkIsMe = players[0];
-            }
-            else
-            {
-                playerLastWalkIsMe = players.Find(i => i.Id == player.Id + 1);
-            }
+            if (player != null) {
+                player.LastWalkIsMe = false;
 
-            playerLastWalkIsMe.LastWalkIsMe = true;
+                if (player.Id == 4)
+                {
+                    playerLastWalkIsMe = players[0];
+                }
+                else
+                {
+                    playerLastWalkIsMe = players.Find(i => i.Id == player.Id + 1);
+                }
+
+                playerLastWalkIsMe.LastWalkIsMe = true;
+            }
+            
             return playerLastWalkIsMe;
         }
 
