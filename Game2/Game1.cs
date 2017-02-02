@@ -14,7 +14,7 @@ namespace SnakeLadderQuiz.Desktop
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        int millisecondsPerFrame = 300; //Update every 300 ms
+        int millisecondsPerFrame = 150; //Update every 150 ms
         double timeSinceLastUpdate = 0; //Accumulate the elapsed time
 
         private Texture2D background;        
@@ -122,8 +122,10 @@ namespace SnakeLadderQuiz.Desktop
             // Allows the game to exit
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             //    this.Exit();
+
             var playerNeedToWalks = players.Find(i => i.IsInPositionDestination() == false);
-            if (playerNeedToWalks == null) {
+            if (playerNeedToWalks == null)
+            {
                 KeyboardState state = Keyboard.GetState();
                 if (state.IsKeyDown(Keys.Enter))
                 {
@@ -131,14 +133,17 @@ namespace SnakeLadderQuiz.Desktop
                     {
                         InitFirstMoveAllPlayer();
                     }
-                    else {
+                    else
+                    {
                         // who's turn to walk now?
                         var player = WhoIsNextPlayerToWalk();
                         // hei player, you go to destination now!                    
                         player.PositionDestination = player.Position + RollTheDice();
+                        //player.PositionDestination = 5;
                     }
                 }
             }
+
 
             // slowdown logic 
             timeSinceLastUpdate += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -146,7 +151,7 @@ namespace SnakeLadderQuiz.Desktop
             {
                 timeSinceLastUpdate = 0;
 
-                //YOUR GAMES LOGIC GOES HERE 
+                //YOUR GAMES LOGIC GOES HERE
                 if (playerNeedToWalks != null)
                 {
                     int nextPosition = playerNeedToWalks.Position + 1;
@@ -271,13 +276,13 @@ namespace SnakeLadderQuiz.Desktop
 
         private int? PlayerNeedToMoveUpDown(Player player) {
             int? resultPosition = null;
-            if (ruleUps.ContainsKey(player.Position + 1))
+            if (ruleUps.ContainsKey(player.Position + 2))
             {
-                resultPosition = ruleUps[player.Position + 1] - 1;
+                resultPosition = ruleUps[player.Position + 2] - 1;
             }
-            else if (ruleDowns.ContainsKey(player.Position + 1))
+            else if (ruleDowns.ContainsKey(player.Position + 2))
             {
-                resultPosition = ruleDowns[player.Position + 1] - 1;
+                resultPosition = ruleDowns[player.Position + 2] - 1;
             }
             return resultPosition;
         }
