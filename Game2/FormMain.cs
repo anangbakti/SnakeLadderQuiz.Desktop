@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,9 +28,18 @@ namespace SnakeLadderQuiz.Desktop
 
         private void FinishWalk() {
             this.Invoke((MethodInvoker)delegate
-            {
+            {                          
                 cmdStart.Enabled = true;
+                SetPositionValue();
             });                
+        }
+
+        private void SetPositionValue() {
+            lblPositionPlayer1.Text = (_game1.players[0].Position + 1).ToString();
+            lblPositionPlayer2.Text = (_game1.players[1].Position + 1).ToString();
+            lblPositionPlayer3.Text = (_game1.players[2].Position + 1).ToString();
+            lblPositionPlayer4.Text = (_game1.players[3].Position + 1).ToString();
+            lblPositionPlayer5.Text = (_game1.players[4].Position + 1).ToString();
         }
 
         private void FormMain_Load(object sender, System.EventArgs e)
@@ -41,8 +51,13 @@ namespace SnakeLadderQuiz.Desktop
         {
             if (_game1 != null)
             {
+                lblDiceNumber.Text = new Random().Next(1, 13).ToString();
+                _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
+
                 _game1.RaiseStart = true;
                 cmdStart.Enabled = false;
+
+                
             }
         }
 

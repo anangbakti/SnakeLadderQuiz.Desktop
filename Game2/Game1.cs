@@ -26,8 +26,10 @@ namespace SnakeLadderQuiz.Desktop
 
         public bool RaiseStart = false;
         public bool RaiseReset = false;
-
+        
         public Action FinishWalk;
+
+        public int RollTheDice;
 
         private Dictionary<int, int> ruleUps = new Dictionary<int, int> {
             { 6, 16 },
@@ -148,7 +150,7 @@ namespace SnakeLadderQuiz.Desktop
                         var player = WhoIsNextPlayerToWalk();
                         if (player != null) {
                             // hei player, you go to destination now!                    
-                            player.PositionDestination = player.Position + RollTheDice();
+                            player.PositionDestination = player.Position + RollTheDice;
                         }
                     }
                 }
@@ -374,10 +376,7 @@ namespace SnakeLadderQuiz.Desktop
             return playerLastWalkIsMe;
         }
 
-        private int RollTheDice()
-        {
-            return new Random().Next(1, 12);
-        }
+        
 
         private bool AnyoneWin() {
             return players.Find(i => i.Position == 99) != null;

@@ -47,6 +47,11 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -59,7 +64,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\emo_duit.jpg" />
+    <None Include="Content\emo_gigikawat.jpg" />
+    <None Include="Content\emo_kacagigi.jpg" />
+    <None Include="Content\emo_melet.jpg" />
+    <None Include="Content\emo_nangis.jpg" />
+    <None Include="Content\snake_ladder.jpg" />
     <Content Include="Icon.ico" />
+    <None Include="Resources\emo_duit.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Content.mgcb">
@@ -69,6 +81,10 @@
   <ItemGroup>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
