@@ -35,11 +35,43 @@ namespace SnakeLadderQuiz.Desktop
                 {
                     cmdStart.Enabled = true;
                     SetPositionValue();
+                    CheckWinner();
                 });
             }
             catch (Exception)
             {                
             }                            
+        }
+
+        private void CheckWinner() {
+            var playerWin = _game1.players.Find(i => i.Position == 99);
+            if (playerWin != null)
+            {
+                var playerName = "";
+                if (playerWin.Id == 0)
+                {
+                    playerName = txtPlayer1Name.Text;
+                }
+                else if (playerWin.Id == 1)
+                {
+                    playerName = txtPlayer2Name.Text;
+                }
+                else if (playerWin.Id == 2)
+                {
+                    playerName = txtPlayer3Name.Text;
+                }
+                else if (playerWin.Id == 3)
+                {
+                    playerName = txtPlayer4Name.Text;
+                }
+                else if (playerWin.Id == 4)
+                {
+                    playerName = txtPlayer5Name.Text;
+                }
+
+                MessageBox.Show("Congratulation Player " + (playerWin.Id + 1) + " " +  playerName+ " WIN !!!");
+                cmdStart_Click(null, null);
+            }
         }
 
         private void SetPositionValue() {
