@@ -133,6 +133,7 @@
             // 
             // txtPlayer1Name
             // 
+            this.txtPlayer1Name.BackColor = System.Drawing.SystemColors.Window;
             this.txtPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlayer1Name.Location = new System.Drawing.Point(88, 39);
             this.txtPlayer1Name.Name = "txtPlayer1Name";
@@ -141,6 +142,7 @@
             // 
             // txtPlayer2Name
             // 
+            this.txtPlayer2Name.BackColor = System.Drawing.SystemColors.Window;
             this.txtPlayer2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlayer2Name.Location = new System.Drawing.Point(88, 103);
             this.txtPlayer2Name.Name = "txtPlayer2Name";

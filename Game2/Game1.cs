@@ -30,6 +30,7 @@ namespace SnakeLadderQuiz.Desktop
         public Action FinishWalk;
 
         public int RollTheDice;
+        public int StartPlayerId;
 
         private Dictionary<int, int> ruleUps = new Dictionary<int, int> {
             { 6, 16 },
@@ -136,7 +137,7 @@ namespace SnakeLadderQuiz.Desktop
                 //KeyboardState state = Keyboard.GetState();
                 //if (state.IsKeyDown(Keys.Enter))
                 if (RaiseStart)
-                {                
+                {
                     RaiseStart = false;
                     if (AnyoneWin())
                     {
@@ -303,14 +304,9 @@ namespace SnakeLadderQuiz.Desktop
                 SetPositionPlayer(player, 0);
                 player.PositionDestination = 0;
                 player.LastWalkIsMe = false;
-            }
-            RandomizeStartPlayer().LastWalkIsMe = true;
+            }            
         }
-
-        private Player RandomizeStartPlayer() {
-            return players[new Random().Next(0, 4)];
-        }
-
+        
         private int? PlayerNeedToMoveUpDown(Player player) {
             int? resultPosition = null;
             if (ruleUps.ContainsKey(player.Position + 2))
@@ -358,7 +354,8 @@ namespace SnakeLadderQuiz.Desktop
 
             Player player = players.Find(i => i.LastWalkIsMe == true);
 
-            if (player != null) {
+            if (player != null)
+            {
                 player.LastWalkIsMe = false;
 
                 if (player.Id == 4)
@@ -371,6 +368,12 @@ namespace SnakeLadderQuiz.Desktop
                 }
 
                 playerLastWalkIsMe.LastWalkIsMe = true;
+            }
+            else {
+                // game just started
+                player =  players[StartPlayerId];
+                player.LastWalkIsMe = true;
+                return player;
             }
             
             return playerLastWalkIsMe;

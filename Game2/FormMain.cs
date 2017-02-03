@@ -14,6 +14,7 @@ namespace SnakeLadderQuiz.Desktop
     public partial class FormMain : Form
     {
         private Game1 _game1;
+        private int _startPlayerId = 0;
 
         //public FormMain(Game1 game1)
         public FormMain()
@@ -27,19 +28,31 @@ namespace SnakeLadderQuiz.Desktop
         }
 
         private void FinishWalk() {
-            this.Invoke((MethodInvoker)delegate
-            {                          
-                cmdStart.Enabled = true;
-                SetPositionValue();
-            });                
+            try
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    cmdStart.Enabled = true;
+                    SetPositionValue();
+                });
+            }
+            catch (Exception)
+            {                
+            }                            
         }
 
         private void SetPositionValue() {
-            lblPositionPlayer1.Text = (_game1.players[0].Position + 1).ToString();
-            lblPositionPlayer2.Text = (_game1.players[1].Position + 1).ToString();
-            lblPositionPlayer3.Text = (_game1.players[2].Position + 1).ToString();
-            lblPositionPlayer4.Text = (_game1.players[3].Position + 1).ToString();
-            lblPositionPlayer5.Text = (_game1.players[4].Position + 1).ToString();
+            try
+            {
+                lblPositionPlayer1.Text = (_game1.players[0].Position + 1).ToString();
+                lblPositionPlayer2.Text = (_game1.players[1].Position + 1).ToString();
+                lblPositionPlayer3.Text = (_game1.players[2].Position + 1).ToString();
+                lblPositionPlayer4.Text = (_game1.players[3].Position + 1).ToString();
+                lblPositionPlayer5.Text = (_game1.players[4].Position + 1).ToString();
+            }
+            catch (Exception)
+            {
+            }         
         }
 
         private void FormMain_Load(object sender, System.EventArgs e)
@@ -51,21 +64,66 @@ namespace SnakeLadderQuiz.Desktop
         {
             if (_game1 != null)
             {
+                ResetBackColorTextPlayerName();
+                if (_game1.players.All(i => i.Position == 0))
+                {                   
+                    _startPlayerId = new Random().Next(0, 5);
+                    var name = "";
+                    if (_startPlayerId == 0)
+                    {
+                        SetTextBoxBackColorTomato(txtPlayer1Name, out name);
+                    }
+                    else if (_startPlayerId == 1)
+                    {
+                        SetTextBoxBackColorTomato(txtPlayer2Name, out name);
+                    }
+                    else if (_startPlayerId == 2)
+                    {
+                        SetTextBoxBackColorTomato(txtPlayer3Name, out name);
+                    }
+                    else if (_startPlayerId == 3)
+                    {
+                        SetTextBoxBackColorTomato(txtPlayer4Name, out name);
+                    }
+                    else if (_startPlayerId == 4)
+                    {
+                        SetTextBoxBackColorTomato(txtPlayer5Name, out name);
+                    }
+
+                    _game1.StartPlayerId = _startPlayerId;
+                    _game1.RaiseReset = true;
+                    MessageBox.Show("Player " + (_startPlayerId + 1) + " "+ name +" first");
+                    _game1.RaiseReset = false;
+                }
+              
+
                 lblDiceNumber.Text = new Random().Next(1, 13).ToString();
                 _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
 
                 _game1.RaiseStart = true;
                 cmdStart.Enabled = false;
-
-                
             }
+        }
+
+        private void SetTextBoxBackColorTomato(TextBox txtBox, out string name) {
+            txtBox.BackColor = Color.Tomato;
+            name = txtBox.Text;
+        }
+
+        private void ResetBackColorTextPlayerName() {
+            txtPlayer1Name.BackColor = Color.White;
+            txtPlayer2Name.BackColor = Color.White;
+            txtPlayer3Name.BackColor = Color.White;
+            txtPlayer4Name.BackColor = Color.White;
+            txtPlayer5Name.BackColor = Color.White;
+
         }
 
         private void cmdReset_Click(object sender, EventArgs e)
         {
             if (_game1 != null)
             {
-
+                ResetBackColorTextPlayerName();
                 _game1.RaiseReset = true;
             }
         }
