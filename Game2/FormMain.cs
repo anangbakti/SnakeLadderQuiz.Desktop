@@ -15,6 +15,7 @@ namespace SnakeLadderQuiz.Desktop
     {
         private Game1 _game1;
         private int _startPlayerId = 0;
+        private int _nextPlayerId = 0;
 
         //public FormMain(Game1 game1)
         public FormMain()
@@ -65,37 +66,26 @@ namespace SnakeLadderQuiz.Desktop
             if (_game1 != null)
             {
                 ResetBackColorTextPlayerName();
+                var namePlayer = "";
+               
                 if (_game1.players.All(i => i.Position == 0))
-                {                   
+                {
                     _startPlayerId = new Random().Next(0, 5);
-                    var name = "";
-                    if (_startPlayerId == 0)
-                    {
-                        SetTextBoxBackColorTomato(txtPlayer1Name, out name);
-                    }
-                    else if (_startPlayerId == 1)
-                    {
-                        SetTextBoxBackColorTomato(txtPlayer2Name, out name);
-                    }
-                    else if (_startPlayerId == 2)
-                    {
-                        SetTextBoxBackColorTomato(txtPlayer3Name, out name);
-                    }
-                    else if (_startPlayerId == 3)
-                    {
-                        SetTextBoxBackColorTomato(txtPlayer4Name, out name);
-                    }
-                    else if (_startPlayerId == 4)
-                    {
-                        SetTextBoxBackColorTomato(txtPlayer5Name, out name);
-                    }
+                    
+                    SetTextBoxBackColorTomatoByPlayerId(_startPlayerId, out namePlayer);
 
                     _game1.StartPlayerId = _startPlayerId;
                     _game1.RaiseReset = true;
-                    MessageBox.Show("Player " + (_startPlayerId + 1) + " "+ name +" first");
+                    MessageBox.Show("Player " + (_startPlayerId + 1) + " " + namePlayer + " first");
                     _game1.RaiseReset = false;
+
+                    _nextPlayerId = _startPlayerId;
                 }
-              
+                else {
+                    _nextPlayerId += 1;
+                    if (_nextPlayerId == 5) _nextPlayerId = 0;
+                    SetTextBoxBackColorTomatoByPlayerId(_nextPlayerId, out namePlayer);
+                }              
 
                 lblDiceNumber.Text = new Random().Next(1, 13).ToString();
                 _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
@@ -108,6 +98,30 @@ namespace SnakeLadderQuiz.Desktop
         private void SetTextBoxBackColorTomato(TextBox txtBox, out string name) {
             txtBox.BackColor = Color.Tomato;
             name = txtBox.Text;
+        }
+
+        private void SetTextBoxBackColorTomatoByPlayerId(int playerId, out string name) {
+            name = "";          
+            if (playerId == 0)
+            {
+                SetTextBoxBackColorTomato(txtPlayer1Name, out name);
+            }
+            else if (playerId == 1)
+            {
+                SetTextBoxBackColorTomato(txtPlayer2Name, out name);
+            }
+            else if (playerId == 2)
+            {
+                SetTextBoxBackColorTomato(txtPlayer3Name, out name);
+            }
+            else if (playerId == 3)
+            {
+                SetTextBoxBackColorTomato(txtPlayer4Name, out name);
+            }
+            else if (playerId == 4)
+            {
+                SetTextBoxBackColorTomato(txtPlayer5Name, out name);
+            }
         }
 
         private void ResetBackColorTextPlayerName() {
