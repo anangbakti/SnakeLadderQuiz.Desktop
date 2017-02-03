@@ -40,11 +40,6 @@
             this.txtPlayer3Name = new System.Windows.Forms.TextBox();
             this.txtPlayer4Name = new System.Windows.Forms.TextBox();
             this.txtPlayer5Name = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblPositionPlayer1 = new System.Windows.Forms.Label();
             this.lblPositionPlayer2 = new System.Windows.Forms.Label();
@@ -53,17 +48,23 @@
             this.lblPositionPlayer5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblDiceNumber = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.cmdDaftarSoal = new System.Windows.Forms.Button();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdStart
             // 
             this.cmdStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdStart.Location = new System.Drawing.Point(444, 124);
+            this.cmdStart.Location = new System.Drawing.Point(12, 354);
             this.cmdStart.Name = "cmdStart";
             this.cmdStart.Size = new System.Drawing.Size(128, 74);
             this.cmdStart.TabIndex = 0;
@@ -73,7 +74,7 @@
             // 
             // cmdReset
             // 
-            this.cmdReset.Location = new System.Drawing.Point(578, 308);
+            this.cmdReset.Location = new System.Drawing.Point(230, 443);
             this.cmdReset.Name = "cmdReset";
             this.cmdReset.Size = new System.Drawing.Size(75, 23);
             this.cmdReset.TabIndex = 1;
@@ -173,56 +174,6 @@
             this.txtPlayer5Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer5Name.TabIndex = 11;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_gigikawat;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(70, 58);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_melet;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 76);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(70, 58);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_kacagigi;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 140);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(70, 58);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 14;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_nangis;
-            this.pictureBox4.Location = new System.Drawing.Point(12, 204);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(70, 58);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 15;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_duit;
-            this.pictureBox5.Location = new System.Drawing.Point(12, 268);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(70, 58);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 16;
-            this.pictureBox5.TabStop = false;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -287,7 +238,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(447, 9);
+            this.label7.Location = new System.Drawing.Point(170, 354);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 24);
             this.label7.TabIndex = 23;
@@ -297,18 +248,79 @@
             // 
             this.lblDiceNumber.AutoSize = true;
             this.lblDiceNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiceNumber.Location = new System.Drawing.Point(491, 60);
+            this.lblDiceNumber.Location = new System.Drawing.Point(216, 389);
             this.lblDiceNumber.Name = "lblDiceNumber";
             this.lblDiceNumber.Size = new System.Drawing.Size(36, 39);
             this.lblDiceNumber.TabIndex = 24;
             this.lblDiceNumber.Text = "0";
+            // 
+            // cmdDaftarSoal
+            // 
+            this.cmdDaftarSoal.Location = new System.Drawing.Point(311, 443);
+            this.cmdDaftarSoal.Name = "cmdDaftarSoal";
+            this.cmdDaftarSoal.Size = new System.Drawing.Size(75, 23);
+            this.cmdDaftarSoal.TabIndex = 25;
+            this.cmdDaftarSoal.Text = "Daftar Soal";
+            this.cmdDaftarSoal.UseVisualStyleBackColor = true;
+            this.cmdDaftarSoal.Click += new System.EventHandler(this.cmdDaftarSoal_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_duit;
+            this.pictureBox5.Location = new System.Drawing.Point(12, 268);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(70, 58);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 16;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_nangis;
+            this.pictureBox4.Location = new System.Drawing.Point(12, 204);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(70, 58);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 15;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_kacagigi;
+            this.pictureBox3.Location = new System.Drawing.Point(12, 140);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(70, 58);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 14;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_melet;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 76);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(70, 58);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SnakeLadderQuiz.Desktop.Properties.Resources.emo_gigikawat;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 58);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(665, 343);
+            this.ClientSize = new System.Drawing.Size(395, 470);
+            this.Controls.Add(this.cmdDaftarSoal);
             this.Controls.Add(this.lblDiceNumber);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblPositionPlayer5);
@@ -334,17 +346,18 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdReset);
             this.Controls.Add(this.cmdStart);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Snake Ladder Quiz";
+            this.Text = "Snake Ladder Quiz Dialog";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,5 +390,6 @@
         private System.Windows.Forms.Label lblPositionPlayer5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblDiceNumber;
+        private System.Windows.Forms.Button cmdDaftarSoal;
     }
 }

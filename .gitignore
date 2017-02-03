@@ -11,7 +11,7 @@
 *.userprefs
 
 # Build results
-EBoarding.Data.Test/
+bin/
 x64/
 x86/
 build/

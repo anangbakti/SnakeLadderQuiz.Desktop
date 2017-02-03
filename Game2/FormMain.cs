@@ -173,5 +173,15 @@ namespace SnakeLadderQuiz.Desktop
                 _game1.RaiseReset = true;
             }
         }
+
+        private void cmdDaftarSoal_Click(object sender, EventArgs e)
+        {
+            if (_frmDaftarSoal == null) {
+                _frmDaftarSoal = new FormDaftarSoal();
+            }
+            _frmDaftarSoal.ShowDialog(this);
+        }
+
+        private FormDaftarSoal _frmDaftarSoal;
     }
 }

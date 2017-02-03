@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Configuration;
+using SnakeLadderQuiz.Data;
 
 namespace SnakeLadderQuiz.Desktop
 {
@@ -9,6 +11,8 @@ namespace SnakeLadderQuiz.Desktop
     /// </summary>
     public static class Program
     {
+        public static Factory factory;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,6 +23,9 @@ namespace SnakeLadderQuiz.Desktop
             //{
                 try
                 {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    factory = new Factory(ConfigurationManager.ConnectionStrings["sqlite"].ConnectionString);
                     Form frm = new FormMain();
                     Application.Run(frm);
                 }
