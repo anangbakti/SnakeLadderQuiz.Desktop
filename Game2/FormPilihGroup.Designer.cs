@@ -81,6 +81,7 @@
             this.cmdPilihGroup.TabIndex = 4;
             this.cmdPilihGroup.Text = "Pilih Group";
             this.cmdPilihGroup.UseVisualStyleBackColor = true;
+            this.cmdPilihGroup.Click += new System.EventHandler(this.cmdPilihGroup_Click);
             // 
             // cmdAddGroup
             // 

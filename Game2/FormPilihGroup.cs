@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using SnakeLadderQuiz.Data.Entities;
 
 namespace SnakeLadderQuiz.Desktop
 {
     public partial class FormPilihGroup : Form
     {
+        public List<GroupSoal> groupTerpilih = new List<GroupSoal>();
+
         public FormPilihGroup()
         {
             InitializeComponent();
@@ -79,6 +82,26 @@ namespace SnakeLadderQuiz.Desktop
             }
 
             gvGroupSoal.Columns[0].ReadOnly = false;
-        }        
+        }
+
+        private void cmdPilihGroup_Click(object sender, EventArgs e)
+        {
+            groupTerpilih = new List<GroupSoal>();
+            foreach (DataGridViewRow row in gvGroupSoal.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["ColumnCheckBox"];
+                if (bool.Parse(chk.Value.ToString()) == true)
+                {
+                    GroupSoal gs = new GroupSoal()
+                    {
+                        gs_id = int.Parse(chk.OwningRow.Cells["gs_id"].Value.ToString()),
+                        gs_name = chk.OwningRow.Cells["gs_name"].Value.ToString()
+                    };
+
+                    groupTerpilih.Add(gs);                   
+                }
+            }
+            this.Close();
+        }
     }
 }
