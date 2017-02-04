@@ -17,5 +17,10 @@ namespace SnakeLadderQuiz.Data
         public SoalRepo GetSoal() {
             return new SoalRepo(_connString);
         }
+
+        public GroupSoalRepo GetGroupSoal()
+        {
+            return new GroupSoalRepo(_connString);
+        }
     }
 }
