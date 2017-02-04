@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 using SnakeLadderQuiz.Data.Entities;
 
 namespace SnakeLadderQuiz.Desktop
@@ -14,19 +15,37 @@ namespace SnakeLadderQuiz.Desktop
     public partial class FormEntrySoal : Form
     {
 
-        private FormPilihGroup _frmPilihGroup = new FormPilihGroup();
+        private FormPilihGroup FrmPilihGroup = new FormPilihGroup();
         public List<GroupSoal> GroupTerpilih = new List<GroupSoal>();
+        public List<SoalPilihanMultiple> Pilihans = new List<SoalPilihanMultiple>();
 
         public FormEntrySoal()
         {
             InitializeComponent();
-            
+
+            gvGroup.KeyDown += GvGroup_KeyDown;
         }
 
-        private void LoadGroupTerpilih() {
+        private void GvGroup_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (gvGroup.Rows.Count == 0) return;
+                var gsId = int.Parse(gvGroup.SelectedCells[0].OwningRow.Cells["gs_id"].Value.ToString());
+                GroupTerpilih.Remove(GroupTerpilih.Find(i => i.gs_id == gsId));
+                LoadGridGroupTerpilih();
+            }
+        }
+
+        private void LoadGridGroupTerpilih() {
             gvGroup.DataSource = null;
             gvGroup.DataSource = GroupTerpilih;
             SetGridGroupProp();
+        }
+
+        private void LoadGridPilihan() {
+            gvJawabanMultiple.DataSource = null;
+            gvJawabanMultiple.DataSource = Pilihans;
         }
 
         private void SetGridGroupProp() {
@@ -45,19 +64,19 @@ namespace SnakeLadderQuiz.Desktop
 
         private void cmdAddGroup_Click(object sender, EventArgs e)
         {
-            _frmPilihGroup.ShowDialog(this);
-            if (_frmPilihGroup.DialogResult == DialogResult.OK) {
-                if (_frmPilihGroup.GroupTerpilih.Count > 0)
+            FrmPilihGroup.ShowDialog(this);
+            if (FrmPilihGroup.DialogResult == DialogResult.OK) {
+                if (FrmPilihGroup.GroupTerpilih.Count > 0)
                 {
                     if (GroupTerpilih.Count == 0)
                     {
-                        GroupTerpilih.AddRange(_frmPilihGroup.GroupTerpilih);
+                        GroupTerpilih.AddRange(FrmPilihGroup.GroupTerpilih);
                     }
                     else
                     {
                         List<GroupSoal> newGs = new List<GroupSoal>();
 
-                        foreach (var item in _frmPilihGroup.GroupTerpilih)
+                        foreach (var item in FrmPilihGroup.GroupTerpilih)
                         {
                             var itemCheck = GroupTerpilih.Find(i => i.gs_id == item.gs_id);
                             if (itemCheck == null)
@@ -71,9 +90,16 @@ namespace SnakeLadderQuiz.Desktop
                         }
                     }
 
-                    LoadGroupTerpilih();
+                    LoadGridGroupTerpilih();
                 }
             }
+        }
+
+        private void cmdAddMultiple_Click(object sender, EventArgs e)
+        {
+            string entryItemMultiple = Interaction.InputBox("Isi pilihan Multiple", "Isi pilihan Multiple");
+            Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple });
+            LoadGridPilihan();
         }
     }
         

@@ -108,6 +108,8 @@
             // 
             // gvJawabanMultiple
             // 
+            this.gvJawabanMultiple.AllowUserToAddRows = false;
+            this.gvJawabanMultiple.AllowUserToDeleteRows = false;
             this.gvJawabanMultiple.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvJawabanMultiple.Location = new System.Drawing.Point(128, 219);
             this.gvJawabanMultiple.Name = "gvJawabanMultiple";
@@ -122,6 +124,7 @@
             this.cmdAddMultiple.TabIndex = 8;
             this.cmdAddMultiple.Text = "Add Pilihan";
             this.cmdAddMultiple.UseVisualStyleBackColor = true;
+            this.cmdAddMultiple.Click += new System.EventHandler(this.cmdAddMultiple_Click);
             // 
             // cmdSimpan
             // 

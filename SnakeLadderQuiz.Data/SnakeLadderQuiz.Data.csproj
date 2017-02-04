@@ -60,6 +60,7 @@
     <Compile Include="BaseRepo.cs" />
     <Compile Include="Entities\GroupSoal.cs" />
     <Compile Include="Entities\Soal.cs" />
+    <Compile Include="Entities\SoalPilihanMultiple.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="GroupSoalRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
