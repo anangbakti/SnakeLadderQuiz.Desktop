@@ -51,6 +51,8 @@ namespace SnakeLadderQuiz.Desktop
                     }
                 }
             }
+
+            // tricky point
             gvJawabanMultiple.RefreshEdit();
         }
         

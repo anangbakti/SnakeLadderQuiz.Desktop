@@ -14,6 +14,11 @@ namespace SnakeLadderQuiz.Data
             _connString = connString;
         }
 
+        public BaseRepo GetBase()
+        {
+            return new BaseRepo(_connString);
+        }
+
         public SoalRepo GetSoal() {
             return new SoalRepo(_connString);
         }
@@ -22,5 +27,16 @@ namespace SnakeLadderQuiz.Data
         {
             return new GroupSoalRepo(_connString);
         }
+
+        public SoalPilihanMultipleRepo GetSoalPilihanMultiple()
+        {
+            return new SoalPilihanMultipleRepo(_connString);
+        }
+
+        public SoalTagGroupRepo GetSoalTagGroupRepo()
+        {
+            return new SoalTagGroupRepo(_connString);
+        }
+
     }
 }

@@ -39,6 +39,21 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
+        public int Insert(Soal soal) {
+            int result = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" insert into soal (soal_jenis, soal_tanya, soal_jawab) values (@soal_jenis, @soal_tanya, @soal_jawab) ");
+            _conn.Open();
+            using (_conn)
+            {
+                result = _conn.Execute(sb.ToString(), new { soal_jenis = soal.Soal_Jenis,
+                    soal_tanya = soal.Soal_Tanya,
+                    soal_jawab = soal.Soal_Jawab
+                });
+            }
+            return result;
+        }
+
 
     }
 }

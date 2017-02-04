@@ -61,10 +61,13 @@
     <Compile Include="Entities\GroupSoal.cs" />
     <Compile Include="Entities\Soal.cs" />
     <Compile Include="Entities\SoalPilihanMultiple.cs" />
+    <Compile Include="Entities\SoalTagGroup.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="GroupSoalRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoalPilihanMultipleRepo.cs" />
     <Compile Include="SoalRepo.cs" />
+    <Compile Include="SoalTagGroupRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
