@@ -150,7 +150,19 @@ namespace SnakeLadderQuiz.Desktop
         private void cmdSimpan_Click(object sender, EventArgs e)
         {
             if (!ValidateBeforeSimpan()) return;
+            Soal soal = new Soal();
+            soal.Soal_Jenis = rbEssay.Checked ? "ESSAY" : "MULTIPLE";
+            soal.Soal_Tanya = txtPertanyaan.Text.Trim();
+            soal.Soal_Jawab = rbEssay.Checked ? txtJawabanEssay.Text.Trim() : "";
+            Program.factory.GetSoal().Insert(soal);
 
+            int lastInsertSoalId = Program.factory.GetBase().GetLastSeq("SOAL").Value;
+
+            //delete pilihan multi by soalid
+            //insert pilihan multi by soalid
+
+            //delete tag group by soalid
+            //insert tag group by soalid
         }
 
         private bool ValidateBeforeSimpan() {
