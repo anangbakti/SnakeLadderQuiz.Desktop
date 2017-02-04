@@ -31,17 +31,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtPertanyaan = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rbEssay = new System.Windows.Forms.RadioButton();
             this.txtJawabanEssay = new System.Windows.Forms.RichTextBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbMultiple = new System.Windows.Forms.RadioButton();
             this.gvJawabanMultiple = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdAddMultiple = new System.Windows.Forms.Button();
             this.cmdSimpan = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.gvGroup = new System.Windows.Forms.DataGridView();
+            this.cmdAddGroup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvJawabanMultiple)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -74,17 +74,17 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Jawaban";
             // 
-            // radioButton1
+            // rbEssay
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(128, 101);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(53, 17);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Essay";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbEssay.AutoSize = true;
+            this.rbEssay.Checked = true;
+            this.rbEssay.Location = new System.Drawing.Point(128, 101);
+            this.rbEssay.Name = "rbEssay";
+            this.rbEssay.Size = new System.Drawing.Size(53, 17);
+            this.rbEssay.TabIndex = 4;
+            this.rbEssay.TabStop = true;
+            this.rbEssay.Text = "Essay";
+            this.rbEssay.UseVisualStyleBackColor = true;
             // 
             // txtJawabanEssay
             // 
@@ -96,15 +96,15 @@
             this.txtJawabanEssay.TabIndex = 5;
             this.txtJawabanEssay.Text = "";
             // 
-            // radioButton2
+            // rbMultiple
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(128, 196);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 17);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.Text = "Multiple";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbMultiple.AutoSize = true;
+            this.rbMultiple.Location = new System.Drawing.Point(128, 196);
+            this.rbMultiple.Name = "rbMultiple";
+            this.rbMultiple.Size = new System.Drawing.Size(61, 17);
+            this.rbMultiple.TabIndex = 6;
+            this.rbMultiple.Text = "Multiple";
+            this.rbMultiple.UseVisualStyleBackColor = true;
             // 
             // gvJawabanMultiple
             // 
@@ -114,14 +114,14 @@
             this.gvJawabanMultiple.Size = new System.Drawing.Size(475, 129);
             this.gvJawabanMultiple.TabIndex = 7;
             // 
-            // button1
+            // cmdAddMultiple
             // 
-            this.button1.Location = new System.Drawing.Point(227, 193);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Add Pilihan";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmdAddMultiple.Location = new System.Drawing.Point(227, 193);
+            this.cmdAddMultiple.Name = "cmdAddMultiple";
+            this.cmdAddMultiple.Size = new System.Drawing.Size(74, 23);
+            this.cmdAddMultiple.TabIndex = 8;
+            this.cmdAddMultiple.Text = "Add Pilihan";
+            this.cmdAddMultiple.UseVisualStyleBackColor = true;
             // 
             // cmdSimpan
             // 
@@ -143,37 +143,43 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Group";
             // 
-            // dataGridView1
+            // gvGroup
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(205, 354);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(169, 62);
-            this.dataGridView1.TabIndex = 11;
+            this.gvGroup.AllowUserToAddRows = false;
+            this.gvGroup.AllowUserToDeleteRows = false;
+            this.gvGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvGroup.ColumnHeadersVisible = false;
+            this.gvGroup.Location = new System.Drawing.Point(205, 354);
+            this.gvGroup.Name = "gvGroup";
+            this.gvGroup.ReadOnly = true;
+            this.gvGroup.RowHeadersVisible = false;
+            this.gvGroup.Size = new System.Drawing.Size(169, 98);
+            this.gvGroup.TabIndex = 11;
             // 
-            // button2
+            // cmdAddGroup
             // 
-            this.button2.Location = new System.Drawing.Point(128, 354);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Add Group";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cmdAddGroup.Location = new System.Drawing.Point(128, 354);
+            this.cmdAddGroup.Name = "cmdAddGroup";
+            this.cmdAddGroup.Size = new System.Drawing.Size(71, 23);
+            this.cmdAddGroup.TabIndex = 12;
+            this.cmdAddGroup.Text = "Add Group";
+            this.cmdAddGroup.UseVisualStyleBackColor = true;
+            this.cmdAddGroup.Click += new System.EventHandler(this.cmdAddGroup_Click);
             // 
             // FormEntrySoal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 464);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.cmdAddGroup);
+            this.Controls.Add(this.gvGroup);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmdSimpan);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdAddMultiple);
             this.Controls.Add(this.gvJawabanMultiple);
-            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.rbMultiple);
             this.Controls.Add(this.txtJawabanEssay);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rbEssay);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPertanyaan);
             this.Controls.Add(this.label1);
@@ -183,7 +189,7 @@
             this.ShowIcon = false;
             this.Text = "Entri Soal";
             ((System.ComponentModel.ISupportInitialize)(this.gvJawabanMultiple)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvGroup)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,14 +200,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox txtPertanyaan;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbEssay;
         private System.Windows.Forms.RichTextBox txtJawabanEssay;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbMultiple;
         private System.Windows.Forms.DataGridView gvJawabanMultiple;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdAddMultiple;
         private System.Windows.Forms.Button cmdSimpan;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView gvGroup;
+        private System.Windows.Forms.Button cmdAddGroup;
     }
 }

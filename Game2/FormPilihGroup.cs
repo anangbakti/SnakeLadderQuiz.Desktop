@@ -14,7 +14,7 @@ namespace SnakeLadderQuiz.Desktop
 {
     public partial class FormPilihGroup : Form
     {
-        public List<GroupSoal> groupTerpilih = new List<GroupSoal>();
+        public List<GroupSoal> GroupTerpilih = new List<GroupSoal>();
 
         public FormPilihGroup()
         {
@@ -86,11 +86,11 @@ namespace SnakeLadderQuiz.Desktop
 
         private void cmdPilihGroup_Click(object sender, EventArgs e)
         {
-            groupTerpilih = new List<GroupSoal>();
+            GroupTerpilih = new List<GroupSoal>();
             foreach (DataGridViewRow row in gvGroupSoal.Rows)
             {
                 DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells["ColumnCheckBox"];
-                if (bool.Parse(chk.Value.ToString()) == true)
+                if (chk.Value != null && bool.Parse(chk.Value.ToString()) == true)
                 {
                     GroupSoal gs = new GroupSoal()
                     {
@@ -98,9 +98,11 @@ namespace SnakeLadderQuiz.Desktop
                         gs_name = chk.OwningRow.Cells["gs_name"].Value.ToString()
                     };
 
-                    groupTerpilih.Add(gs);                   
+                    GroupTerpilih.Add(gs);                 
                 }
             }
+           
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }
