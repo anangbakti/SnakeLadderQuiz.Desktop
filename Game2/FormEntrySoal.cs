@@ -24,8 +24,36 @@ namespace SnakeLadderQuiz.Desktop
             InitializeComponent();
 
             gvGroup.KeyDown += GvGroup_KeyDown;
+            gvJawabanMultiple.CellClick += GvJawabanMultiple_CellClick;
+            
         }
+             
+        private void GvJawabanMultiple_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == gvJawabanMultiple.Columns["spm_pilihanbenar"].Index)
+            {
+                if (e.RowIndex < 0) return;
 
+                // update Pilihans
+                Pilihans[e.RowIndex].spm_pilihanbenar = !Pilihans[e.RowIndex].spm_pilihanbenar;
+                
+                if (Pilihans[e.RowIndex].spm_pilihanbenar)
+                {
+                    foreach (DataGridViewRow row in gvJawabanMultiple.Rows)
+                    {
+                        if (row.Index != e.RowIndex)
+                        {
+                            row.Cells[e.ColumnIndex].Value = !Pilihans[e.RowIndex].spm_pilihanbenar;
+                        }
+                        else {
+                            row.Cells[e.ColumnIndex].Value = Pilihans[e.RowIndex].spm_pilihanbenar;
+                        }
+                    }
+                }
+            }
+            gvJawabanMultiple.RefreshEdit();
+        }
+        
         private void GvGroup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -46,12 +74,21 @@ namespace SnakeLadderQuiz.Desktop
         private void LoadGridPilihan() {
             gvJawabanMultiple.DataSource = null;
             gvJawabanMultiple.DataSource = Pilihans;
+            SetGridMultiple();
         }
 
         private void SetGridGroupProp() {
             gvGroup.Columns["gs_id"].Visible = false;
         }
 
+        private void SetGridMultiple()
+        {
+            gvJawabanMultiple.Columns["spm_id"].Visible = false;
+            gvJawabanMultiple.Columns["soal_id"].Visible = false;
+            gvJawabanMultiple.Columns["spm_pilihan"].HeaderText = "Pilihan";
+            gvJawabanMultiple.Columns["spm_pilihan"].Width = 373;
+            gvJawabanMultiple.Columns["spm_pilihanbenar"].HeaderText = "Jawaban Benar";           
+        }
 
         public void Edit(int soalId)
         {
@@ -98,7 +135,13 @@ namespace SnakeLadderQuiz.Desktop
         private void cmdAddMultiple_Click(object sender, EventArgs e)
         {
             string entryItemMultiple = Interaction.InputBox("Isi pilihan Multiple", "Isi pilihan Multiple");
-            Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple });
+            if (Pilihans.Count == 0)
+            {
+                Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple, spm_pilihanbenar =true });
+            }
+            else {
+                Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple });
+            }
             LoadGridPilihan();
         }
     }

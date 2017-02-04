@@ -110,9 +110,10 @@
             // 
             this.gvJawabanMultiple.AllowUserToAddRows = false;
             this.gvJawabanMultiple.AllowUserToDeleteRows = false;
-            this.gvJawabanMultiple.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvJawabanMultiple.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gvJawabanMultiple.Location = new System.Drawing.Point(128, 219);
             this.gvJawabanMultiple.Name = "gvJawabanMultiple";
+            this.gvJawabanMultiple.RowHeadersVisible = false;
             this.gvJawabanMultiple.Size = new System.Drawing.Size(475, 129);
             this.gvJawabanMultiple.TabIndex = 7;
             // 
