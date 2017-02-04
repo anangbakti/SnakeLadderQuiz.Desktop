@@ -350,7 +350,6 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Snake Ladder Quiz Dialog";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();

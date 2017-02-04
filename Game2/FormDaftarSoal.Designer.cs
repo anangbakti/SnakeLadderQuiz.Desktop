@@ -60,7 +60,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 474);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(661, 418);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gvDaftarSoal
@@ -72,7 +72,7 @@
             this.gvDaftarSoal.Location = new System.Drawing.Point(3, 143);
             this.gvDaftarSoal.Name = "gvDaftarSoal";
             this.gvDaftarSoal.ReadOnly = true;
-            this.gvDaftarSoal.Size = new System.Drawing.Size(763, 290);
+            this.gvDaftarSoal.Size = new System.Drawing.Size(655, 234);
             this.gvDaftarSoal.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -94,7 +94,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(763, 134);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(655, 134);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // label2
@@ -148,7 +148,7 @@
             this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGroup.Location = new System.Drawing.Point(283, 3);
             this.txtGroup.Name = "txtGroup";
-            this.txtGroup.Size = new System.Drawing.Size(477, 35);
+            this.txtGroup.Size = new System.Drawing.Size(369, 35);
             this.txtGroup.TabIndex = 4;
             // 
             // txtSoal
@@ -157,7 +157,7 @@
             this.txtSoal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSoal.Location = new System.Drawing.Point(283, 43);
             this.txtSoal.Name = "txtSoal";
-            this.txtSoal.Size = new System.Drawing.Size(477, 35);
+            this.txtSoal.Size = new System.Drawing.Size(369, 35);
             this.txtSoal.TabIndex = 5;
             // 
             // tableLayoutPanel3
@@ -168,7 +168,7 @@
             this.tableLayoutPanel3.Controls.Add(this.cmdPrev, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.cmdNext, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(566, 439);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(458, 383);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -199,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 474);
+            this.ClientSize = new System.Drawing.Size(661, 418);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormDaftarSoal";
             this.ShowIcon = false;

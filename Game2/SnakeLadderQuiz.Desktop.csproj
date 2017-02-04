@@ -47,11 +47,23 @@
     <Compile Include="FormDaftarSoal.Designer.cs">
       <DependentUpon>FormDaftarSoal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEntrySoal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntrySoal.Designer.cs">
+      <DependentUpon>FormEntrySoal.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPilihGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPilihGroup.Designer.cs">
+      <DependentUpon>FormPilihGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -63,8 +75,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StringInterpolationBridge, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StringInterpolationBridge.0.9.1\lib\net40\StringInterpolationBridge.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -76,6 +96,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,8 +119,14 @@
     <EmbeddedResource Include="FormDaftarSoal.resx">
       <DependentUpon>FormDaftarSoal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEntrySoal.resx">
+      <DependentUpon>FormEntrySoal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPilihGroup.resx">
+      <DependentUpon>FormPilihGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

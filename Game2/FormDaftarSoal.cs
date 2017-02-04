@@ -24,7 +24,18 @@ namespace SnakeLadderQuiz.Desktop
         {
             InitializeComponent();
 
+            gvDaftarSoal.CellDoubleClick += GvDaftarSoal_CellDoubleClick;
+
             cmdFilter_Click(null, null);
+        }
+
+        private void GvDaftarSoal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            FormEntrySoal frmEntrySoal = new FormEntrySoal();
+            frmEntrySoal.Edit(int.Parse(gvDaftarSoal.Rows[e.RowIndex].Cells["soal_id"].Value.ToString()));
+            frmEntrySoal.ShowDialog(this);
+
         }
 
         private void cmdFilter_Click(object sender, EventArgs e)

@@ -9,23 +9,36 @@ using Dapper;
 
 namespace SnakeLadderQuiz.Data
 {
-    public class SoalRepo
-    {
-        private string _connString;
+    public class SoalRepo : BaseRepo
+    {        
                 
-        public SoalRepo(string connString) {
-            _connString = connString;
-        }
+        public SoalRepo(string connString) : base(connString)  {}
 
         public List<Soal> GetAll(int limit , int offset) {
             List<Soal> result = new List<Soal>();
             StringBuilder sb = new StringBuilder();
             sb.Append(" select * from soal limit @limit offset @offset ");
-            var conn = new SQLiteConnection(_connString);
-            conn.Open();
-            result = conn.Query<Soal>(sb.ToString(), new { limit = limit, offset = offset }).ToList();
+            
+            _conn.Open();
+            using (_conn) {
+                result = _conn.Query<Soal>(sb.ToString(), new { limit = limit, offset = offset }).ToList();
+            }
+
             return result;
         }
+
+        public Soal GetById(int soalId) {
+            Soal result = null;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select * from soal where soal_id = :soal_id ");
+
+            _conn.Open();
+            using (_conn) {
+                result = _conn.QueryFirstOrDefault<Soal>(sb.ToString(), new { soal_id = soalId });
+            }
+            return result;
+        }
+
 
     }
 }
