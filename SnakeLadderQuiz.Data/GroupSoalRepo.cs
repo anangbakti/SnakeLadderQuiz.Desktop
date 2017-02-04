@@ -72,10 +72,27 @@ namespace SnakeLadderQuiz.Data
             int result = 0;
             StringBuilder sb = new StringBuilder();
             sb.Append(" delete from group_soal where gs_id = @gs_id ");
+
+            StringBuilder sb2 = new StringBuilder();
+            sb2.Append(" delete from soal_tag_group where gs_id = @gs_id ");
+
             _conn.Open();
             using (_conn)
             {
-                result = _conn.Execute(sb.ToString(), new { gs_id = gsId });
+                using (var trans = _conn.BeginTransaction())
+                {
+                    try
+                    {
+                        result = _conn.Execute(sb.ToString(), new { gs_id = gsId }, trans);
+                        result += _conn.Execute(sb2.ToString(), new { gs_id = gsId }, trans);
+
+                        trans.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        trans.Rollback();
+                    }
+                }                
             }
             return result;
         }
