@@ -136,6 +136,7 @@
             this.cmdSimpan.TabIndex = 9;
             this.cmdSimpan.Text = "Simpan";
             this.cmdSimpan.UseVisualStyleBackColor = true;
+            this.cmdSimpan.Click += new System.EventHandler(this.cmdSimpan_Click);
             // 
             // label3
             // 

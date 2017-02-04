@@ -144,6 +144,35 @@ namespace SnakeLadderQuiz.Desktop
             }
             LoadGridPilihan();
         }
+
+        private void cmdSimpan_Click(object sender, EventArgs e)
+        {
+            if (!ValidateBeforeSimpan()) return;
+
+        }
+
+        private bool ValidateBeforeSimpan() {
+            bool result = true;
+            if (string.IsNullOrEmpty(txtPertanyaan.Text)) {
+                MessageBox.Show("Silahkan isi Pertanyaan terlebih dulu.");
+                result = false;
+            }
+            if (rbEssay.Checked && string.IsNullOrEmpty(txtJawabanEssay.Text))
+            {
+                MessageBox.Show("Silahkan isi Jawaban Essay terlebih dulu.");
+                result = false;
+            }
+            if (rbMultiple.Checked && gvJawabanMultiple.Rows.Count <= 1)
+            {
+                MessageBox.Show("Silahkan isi Jawaban Multiple min. > 1 terlebih dulu.");
+                result = false;
+            }
+            if (gvGroup.Rows.Count == 0) {
+                MessageBox.Show("Silahkan isi kategori Group dari pertanyaan ini.");
+                result = false;
+            }       
+            return result;
+        }
     }
         
 }
