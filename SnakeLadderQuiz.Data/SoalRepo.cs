@@ -54,6 +54,25 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
+        public int Update(Soal soal)
+        {
+            int result = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" update soal  set soal_jenis=@soal_jenis, soal_tanya=@soal_tanya, soal_jawab=@soal_jawab ");
+            sb.Append("  where soal_id=@soal_id ");
+            _conn.Open();
+            using (_conn)
+            {
+                result = _conn.Execute(sb.ToString(), new
+                {
+                    soal_jenis = soal.Soal_Jenis,
+                    soal_tanya = soal.Soal_Tanya,
+                    soal_jawab = soal.Soal_Jawab
+                });
+            }
+            return result;
+        }
+
 
     }
 }

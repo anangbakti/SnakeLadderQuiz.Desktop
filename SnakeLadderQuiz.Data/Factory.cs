@@ -33,7 +33,7 @@ namespace SnakeLadderQuiz.Data
             return new SoalPilihanMultipleRepo(_connString);
         }
 
-        public SoalTagGroupRepo GetSoalTagGroupRepo()
+        public SoalTagGroupRepo GetSoalTagGroup()
         {
             return new SoalTagGroupRepo(_connString);
         }

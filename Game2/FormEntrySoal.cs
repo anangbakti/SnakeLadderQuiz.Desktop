@@ -18,6 +18,7 @@ namespace SnakeLadderQuiz.Desktop
         private FormPilihGroup FrmPilihGroup = new FormPilihGroup();
         public List<GroupSoal> GroupTerpilih = new List<GroupSoal>();
         public List<SoalPilihanMultiple> Pilihans = new List<SoalPilihanMultiple>();
+        private int? SoalId = null;
 
         public FormEntrySoal()
         {
@@ -26,6 +27,30 @@ namespace SnakeLadderQuiz.Desktop
             gvGroup.KeyDown += GvGroup_KeyDown;
             gvJawabanMultiple.CellClick += GvJawabanMultiple_CellClick;
             
+        }
+
+        public void Update(int soalId) {
+            SoalId = soalId;
+
+            //isi soal
+            Soal soal = Program.factory.GetSoal().GetById(soalId);
+            txtPertanyaan.Text = soal.Soal_Tanya;
+            rbEssay.Checked = soal.Soal_Jenis == "ESSAY" ? true : false;
+            rbMultiple.Checked = !rbEssay.Checked;
+
+            //isi multiple jika bukan essay
+            if (rbMultiple.Checked)
+            {
+                Pilihans = Program.factory.GetSoalPilihanMultiple().GetBySoalId(soalId);
+                LoadGridPilihan();
+            }
+            else {
+                txtJawabanEssay.Text = soal.Soal_Jawab;
+            }
+
+            //isi group
+            GroupTerpilih = Program.factory.GetSoalTagGroup().GetBySoalId(soalId);
+            LoadGridGroupTerpilih();
         }
              
         private void GvJawabanMultiple_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -150,19 +175,46 @@ namespace SnakeLadderQuiz.Desktop
         private void cmdSimpan_Click(object sender, EventArgs e)
         {
             if (!ValidateBeforeSimpan()) return;
+
             Soal soal = new Soal();
             soal.Soal_Jenis = rbEssay.Checked ? "ESSAY" : "MULTIPLE";
             soal.Soal_Tanya = txtPertanyaan.Text.Trim();
             soal.Soal_Jawab = rbEssay.Checked ? txtJawabanEssay.Text.Trim() : "";
-            Program.factory.GetSoal().Insert(soal);
 
-            int lastInsertSoalId = Program.factory.GetBase().GetLastSeq("SOAL").Value;
+            if (!SoalId.HasValue)
+            {
+                //Insert mode                
+                Program.factory.GetSoal().Insert(soal);
+
+                SoalId = Program.factory.GetBase().GetLastSeq("SOAL").Value;
+            }
+            else {
+                //Update mode
+                soal.Soal_Id = SoalId.Value;
+                Program.factory.GetSoal().Update(soal);
+            }
 
             //delete pilihan multi by soalid
+            Program.factory.GetSoalPilihanMultiple().DeleteBySoalId(SoalId.Value);
             //insert pilihan multi by soalid
+            foreach (var item in Pilihans)
+            {
+                item.soal_id = SoalId.Value;
+                Program.factory.GetSoalPilihanMultiple().Insert(item);
+            }
 
             //delete tag group by soalid
+            Program.factory.GetSoalTagGroup().DeleteBySoalId(SoalId.Value);
             //insert tag group by soalid
+            foreach (var item in GroupTerpilih)
+            {
+                SoalTagGroup stg = new SoalTagGroup()
+                {
+                    soal_id = SoalId.Value,
+                    gs_id = item.gs_id
+                };
+                Program.factory.GetSoalTagGroup().Insert(stg);
+            }
         }
 
         private bool ValidateBeforeSimpan() {

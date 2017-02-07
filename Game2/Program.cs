@@ -23,15 +23,18 @@ namespace SnakeLadderQuiz.Desktop
             //{
                 try
                 {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
                     factory = new Factory(ConfigurationManager.ConnectionStrings["sqlite"].ConnectionString);
-                    Form frm = new FormMain();
+
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);                   
+                    //Form frm = new FormMain();
+                    Form frm = new FormEntrySoal();
+                    //Form frm = new FormPilihGroup();
                     Application.Run(frm);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                     throw;
                 }
                
