@@ -27,6 +27,39 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
+        public List<Soal> GetByPertanyaanDanNamaGroup(string tanya, string namaGroup,int limit, int offset) {
+            List<Soal> result = new List<Soal>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select s.* from soal s ");
+            if (!string.IsNullOrEmpty(namaGroup)) {
+                sb.Append(" inner join soal_tag_group stg ");
+                sb.Append(" inner join group_soal gs ");
+            }
+            sb.Append(" where  trim(upper(s.soal_tanya)) like trim(upper(@soal_tanya)) ");
+            if (!string.IsNullOrEmpty(namaGroup))
+            {
+                sb.Append(" and s.SOAL_ID = stg.SOAL_ID and stg.GS_ID = gs.GS_ID  ");
+                sb.Append(" and trim(upper(gs.GS_NAME)) like trim(upper(@gs_name)) ");
+            }
+            sb.Append(" limit @limit offset @offset ");
+            _conn.Open();
+            using (_conn) {
+                if (!string.IsNullOrEmpty(namaGroup))
+                {
+                    result = _conn.Query<Soal>(sb.ToString(), new { soal_tanya = "%" + tanya + "%",
+                        gs_name = "%" + namaGroup + "%",
+                        limit = limit,
+                        offset = offset }).ToList();
+                }
+                else {
+                    result = _conn.Query<Soal>(sb.ToString(), new { soal_tanya = "%" + tanya + "%",
+                        limit = limit, offset = offset }).ToList();
+                }
+            }
+
+            return result;
+        }
+
         public Soal GetById(int soalId) {
             Soal result = null;
             StringBuilder sb = new StringBuilder();
@@ -67,8 +100,22 @@ namespace SnakeLadderQuiz.Data
                 {
                     soal_jenis = soal.Soal_Jenis,
                     soal_tanya = soal.Soal_Tanya,
-                    soal_jawab = soal.Soal_Jawab
+                    soal_jawab = soal.Soal_Jawab,
+                    soal_id = soal.Soal_Id
                 });
+            }
+            return result;
+        }
+
+        public int Delete(int soal_id)
+        {
+            int result = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" delete from soal where soal_id = @soal_id ");
+            _conn.Open();
+            using (_conn)
+            {
+                result = _conn.Execute(sb.ToString(), new { soal_id = soal_id });
             }
             return result;
         }

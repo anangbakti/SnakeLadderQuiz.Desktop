@@ -29,8 +29,8 @@ namespace SnakeLadderQuiz.Data
             StringBuilder sb = new StringBuilder();
             sb.Append(" insert into soal_pilihan_multiple (soal_id, spm_pilihan, spm_pilihanbenar) ");
             sb.Append(" values ( ");
-            sb.Append(" values @soal_id,  @spm_pilihan, @spm_pilihanbenar ");
-            sb.Append(" values ) ");
+            sb.Append("  @soal_id,  @spm_pilihan, @spm_pilihanbenar ");
+            sb.Append("  ) ");
             _conn.Open();
             using (_conn)
             {

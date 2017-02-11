@@ -40,6 +40,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.cmdPrev = new System.Windows.Forms.Button();
             this.cmdNext = new System.Windows.Forms.Button();
+            this.cmdAddSoal = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDaftarSoal)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -87,6 +88,7 @@
             this.tableLayoutPanel2.Controls.Add(this.cmdFilter, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.txtGroup, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtSoal, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.cmdAddSoal, 1, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -134,6 +136,7 @@
             // 
             // cmdFilter
             // 
+            this.cmdFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdFilter.Location = new System.Drawing.Point(283, 83);
             this.cmdFilter.Name = "cmdFilter";
             this.cmdFilter.Size = new System.Drawing.Size(75, 44);
@@ -177,6 +180,7 @@
             // 
             // cmdPrev
             // 
+            this.cmdPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdPrev.Location = new System.Drawing.Point(3, 3);
             this.cmdPrev.Name = "cmdPrev";
             this.cmdPrev.Size = new System.Drawing.Size(75, 26);
@@ -187,6 +191,7 @@
             // 
             // cmdNext
             // 
+            this.cmdNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdNext.Location = new System.Drawing.Point(103, 3);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(75, 26);
@@ -194,6 +199,17 @@
             this.cmdNext.Text = ">";
             this.cmdNext.UseVisualStyleBackColor = true;
             this.cmdNext.Click += new System.EventHandler(this.cmdNext_Click);
+            // 
+            // cmdAddSoal
+            // 
+            this.cmdAddSoal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdAddSoal.Location = new System.Drawing.Point(63, 83);
+            this.cmdAddSoal.Name = "cmdAddSoal";
+            this.cmdAddSoal.Size = new System.Drawing.Size(112, 44);
+            this.cmdAddSoal.TabIndex = 6;
+            this.cmdAddSoal.Text = "Tambah Soal";
+            this.cmdAddSoal.UseVisualStyleBackColor = true;
+            this.cmdAddSoal.Click += new System.EventHandler(this.cmdAddSoal_Click);
             // 
             // FormDaftarSoal
             // 
@@ -228,5 +244,6 @@
         private System.Windows.Forms.Button cmdPrev;
         private System.Windows.Forms.Button cmdNext;
         private System.Windows.Forms.TextBox txtSoal;
+        private System.Windows.Forms.Button cmdAddSoal;
     }
 }

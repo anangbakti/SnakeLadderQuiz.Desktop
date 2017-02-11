@@ -26,8 +26,11 @@ namespace SnakeLadderQuiz.Desktop
 
             gvGroup.KeyDown += GvGroup_KeyDown;
             gvJawabanMultiple.CellClick += GvJawabanMultiple_CellClick;
+            gvJawabanMultiple.KeyDown += GvJawabanMultiple_KeyDown;
             
         }
+
+      
 
         public void Update(int soalId) {
             SoalId = soalId;
@@ -80,7 +83,24 @@ namespace SnakeLadderQuiz.Desktop
             // tricky point
             gvJawabanMultiple.RefreshEdit();
         }
-        
+
+        private void GvJawabanMultiple_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (gvJawabanMultiple.Rows.Count == 0) return;
+                Pilihans.Remove(Pilihans.Find(i => 
+                    i.spm_pilihan == gvJawabanMultiple.SelectedCells[0]
+                    .OwningRow.Cells["spm_pilihan"].Value.ToString()));
+
+                if (Pilihans.Count == 1) {
+                    Pilihans[0].spm_pilihanbenar = true;
+                }
+
+                LoadGridPilihan();
+            }
+        }
+
         private void GvGroup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -115,15 +135,6 @@ namespace SnakeLadderQuiz.Desktop
             gvJawabanMultiple.Columns["spm_pilihan"].HeaderText = "Pilihan";
             gvJawabanMultiple.Columns["spm_pilihan"].Width = 373;
             gvJawabanMultiple.Columns["spm_pilihanbenar"].HeaderText = "Jawaban Benar";           
-        }
-
-        public void Edit(int soalId)
-        {
-            var soal = Program.factory.GetSoal().GetById(soalId);
-            if (soal != null)
-            {
-                txtPertanyaan.Text = soal.Soal_Tanya;
-            }
         }
 
         private void cmdAddGroup_Click(object sender, EventArgs e)
@@ -161,7 +172,10 @@ namespace SnakeLadderQuiz.Desktop
 
         private void cmdAddMultiple_Click(object sender, EventArgs e)
         {
+            if (!rbMultiple.Checked) return;
             string entryItemMultiple = Interaction.InputBox("Isi pilihan Multiple", "Isi pilihan Multiple");
+            if (string.IsNullOrEmpty(entryItemMultiple)) return;
+
             if (Pilihans.Count == 0)
             {
                 Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple, spm_pilihanbenar =true });
@@ -215,29 +229,34 @@ namespace SnakeLadderQuiz.Desktop
                 };
                 Program.factory.GetSoalTagGroup().Insert(stg);
             }
+            
+            Close();
         }
 
         private bool ValidateBeforeSimpan() {
-            bool result = true;
             if (string.IsNullOrEmpty(txtPertanyaan.Text)) {
                 MessageBox.Show("Silahkan isi Pertanyaan terlebih dulu.");
-                result = false;
+                txtPertanyaan.Focus();
+                return false;
             }
             if (rbEssay.Checked && string.IsNullOrEmpty(txtJawabanEssay.Text))
             {
                 MessageBox.Show("Silahkan isi Jawaban Essay terlebih dulu.");
-                result = false;
+                txtJawabanEssay.Focus();
+                return false;
             }
             if (rbMultiple.Checked && gvJawabanMultiple.Rows.Count <= 1)
             {
                 MessageBox.Show("Silahkan isi Jawaban Multiple min. > 1 terlebih dulu.");
-                result = false;
+                cmdAddMultiple_Click(null, null);
+                return false;
             }
             if (gvGroup.Rows.Count == 0) {
                 MessageBox.Show("Silahkan isi kategori Group dari pertanyaan ini.");
-                result = false;
+                cmdAddGroup_Click(null, null);
+                return false;
             }       
-            return result;
+            return true;
         }
     }
         
