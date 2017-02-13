@@ -8,7 +8,7 @@ namespace SnakeLadderQuiz.Data.Entities
 {
     public class Soal
     {
-        public double Soal_Id { get; set; }
+        public int Soal_Id { get; set; }
         public string Soal_Jenis { get; set; }
         public string Soal_Tanya { get; set; }
         public string Soal_Jawab { get; set; }

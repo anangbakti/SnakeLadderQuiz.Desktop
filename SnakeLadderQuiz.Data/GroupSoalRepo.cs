@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SnakeLadderQuiz.Data.Entities;
 using Dapper;
+using DapperExtensions;
 
 namespace SnakeLadderQuiz.Data
 {
@@ -13,29 +14,29 @@ namespace SnakeLadderQuiz.Data
 
         public GroupSoalRepo(string connString) : base(connString) { }
 
-        public List<GroupSoal> GetAll() {
-            List<GroupSoal> result = new List<GroupSoal>();
+        public List<Group_Soal> GetAll() {
+            List<Group_Soal> result = new List<Group_Soal>();
             StringBuilder sb = new StringBuilder();
             sb.Append(" select * from group_soal ");
 
             _conn.Open();
             using (_conn)
             {
-                result = _conn.Query<GroupSoal>(sb.ToString()).ToList();
+                result = _conn.Query<Group_Soal>(sb.ToString()).ToList();
             }
 
             return result;
         }
 
-        public List<GroupSoal> GetAllByName(string groupName) {
-            List<GroupSoal> result = new List<GroupSoal>();
+        public List<Group_Soal> GetAllByName(string groupName) {
+            List<Group_Soal> result = new List<Group_Soal>();
             StringBuilder sb = new StringBuilder();
             sb.Append(" select * from group_soal where upper(trim(gs_name)) like upper(trim(@gs_name))");
 
             _conn.Open();
             using (_conn)
             {
-                result = _conn.Query<GroupSoal>(sb.ToString(), new { gs_name = "%" + groupName + "%" }).ToList().ToList();
+                result = _conn.Query<Group_Soal>(sb.ToString(), new { gs_name = "%" + groupName + "%" }).ToList().ToList();
             }
 
             return result;
@@ -50,7 +51,7 @@ namespace SnakeLadderQuiz.Data
             _conn.Open();
             using (_conn)
             {
-                result = _conn.Query<GroupSoal>(sb.ToString(), new { gs_name = groupName }).ToList().Count> 0;
+                result = _conn.Query<Group_Soal>(sb.ToString(), new { gs_name = groupName }).ToList().Count> 0;
             }
 
             return result;
@@ -93,6 +94,30 @@ namespace SnakeLadderQuiz.Data
                         trans.Rollback();
                     }
                 }                
+            }
+            return result;
+        }
+
+        public List<Group_Soal> GetBySoalId(int soal_id)
+        {
+            List<Group_Soal> result = new List<Group_Soal>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select * from group_soal gs join soal_tag_group stg on stg.gs_id = gs.gs_id  ");
+            sb.Append(" where stg.soal_id = @soal_id  ");
+            _conn.Open();
+            using (_conn)
+            {
+                result = _conn.Query<Group_Soal>(sb.ToString(), new { soal_id = soal_id }).ToList();
+            }
+            return result;
+        }
+
+        public int Count() {
+            int result = 0;
+            _conn.Open();
+            using (_conn) {
+                result = _conn.Count<Group_Soal>(null);
+
             }
             return result;
         }

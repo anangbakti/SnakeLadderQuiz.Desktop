@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeLadderQuiz.Data.Entities
 {
-    public class SoalPilihanMultiple
+    public class Soal_Pilihan_Multiple
     {
         public int spm_id { get; set; }
         public int soal_id { get; set; }

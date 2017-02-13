@@ -24,7 +24,7 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
-        public int Insert(SoalPilihanMultiple spm) {
+        public int Insert(Soal_Pilihan_Multiple spm) {
             int result = 0;
             StringBuilder sb = new StringBuilder();
             sb.Append(" insert into soal_pilihan_multiple (soal_id, spm_pilihan, spm_pilihanbenar) ");
@@ -40,13 +40,13 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
-        public List<SoalPilihanMultiple> GetBySoalId(int soal_id) {
-            List<SoalPilihanMultiple> result = new List<SoalPilihanMultiple>();
+        public List<Soal_Pilihan_Multiple> GetBySoalId(int soal_id) {
+            List<Soal_Pilihan_Multiple> result = new List<Soal_Pilihan_Multiple>();
             StringBuilder sb = new StringBuilder();
             sb.Append(" select * from soal_pilihan_multiple where soal_id = @soal_id ");
             _conn.Open();
             using (_conn) {
-                result = _conn.Query<SoalPilihanMultiple>(sb.ToString(), new { soal_id = soal_id }).ToList();
+                result = _conn.Query<Soal_Pilihan_Multiple>(sb.ToString(), new { soal_id = soal_id }).ToList();
             }
             return result;
         } 

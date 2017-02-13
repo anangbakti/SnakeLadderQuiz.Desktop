@@ -16,8 +16,8 @@ namespace SnakeLadderQuiz.Desktop
     {
 
         private FormPilihGroup FrmPilihGroup = new FormPilihGroup();
-        public List<GroupSoal> GroupTerpilih = new List<GroupSoal>();
-        public List<SoalPilihanMultiple> Pilihans = new List<SoalPilihanMultiple>();
+        public List<Group_Soal> GroupTerpilih = new List<Group_Soal>();
+        public List<Soal_Pilihan_Multiple> Pilihans = new List<Soal_Pilihan_Multiple>();
         private int? SoalId = null;
 
         public FormEntrySoal()
@@ -52,7 +52,7 @@ namespace SnakeLadderQuiz.Desktop
             }
 
             //isi group
-            GroupTerpilih = Program.factory.GetSoalTagGroup().GetBySoalId(soalId);
+            GroupTerpilih = Program.factory.GetGroupSoal().GetBySoalId(soalId);
             LoadGridGroupTerpilih();
         }
              
@@ -149,7 +149,7 @@ namespace SnakeLadderQuiz.Desktop
                     }
                     else
                     {
-                        List<GroupSoal> newGs = new List<GroupSoal>();
+                        List<Group_Soal> newGs = new List<Group_Soal>();
 
                         foreach (var item in FrmPilihGroup.GroupTerpilih)
                         {
@@ -178,10 +178,10 @@ namespace SnakeLadderQuiz.Desktop
 
             if (Pilihans.Count == 0)
             {
-                Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple, spm_pilihanbenar =true });
+                Pilihans.Add(new Soal_Pilihan_Multiple() { spm_pilihan = entryItemMultiple, spm_pilihanbenar =true });
             }
             else {
-                Pilihans.Add(new SoalPilihanMultiple() { spm_pilihan = entryItemMultiple });
+                Pilihans.Add(new Soal_Pilihan_Multiple() { spm_pilihan = entryItemMultiple });
             }
             LoadGridPilihan();
         }
@@ -222,7 +222,7 @@ namespace SnakeLadderQuiz.Desktop
             //insert tag group by soalid
             foreach (var item in GroupTerpilih)
             {
-                SoalTagGroup stg = new SoalTagGroup()
+                Soal_Tag_Group stg = new Soal_Tag_Group()
                 {
                     soal_id = SoalId.Value,
                     gs_id = item.gs_id

@@ -72,6 +72,20 @@ namespace SnakeLadderQuiz.Data
             return result;
         }
 
+        public List<Soal> GetByGroupId(int groupId) {
+            List<Soal> result = new List<Soal>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select s.* from soal s  ");
+            sb.Append(" join group_soal gs on s.soal_id = stg.soal_id  ");
+            sb.Append(" join soal_tag_group stg on stg.gs_id = gs.gs_id  ");
+            sb.Append(" where gs.GS_ID = @gs_id ");
+            _conn.Open();
+            using (_conn) {
+                result = _conn.Query<Soal>(sb.ToString(), new { gs_id = groupId }).ToList();
+            }
+            return result;
+        }
+
         public int Insert(Soal soal) {
             int result = 0;
             StringBuilder sb = new StringBuilder();

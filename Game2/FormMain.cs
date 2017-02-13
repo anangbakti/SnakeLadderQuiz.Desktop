@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SnakeLadderQuiz.Data.Entities;
 
 namespace SnakeLadderQuiz.Desktop
 {
@@ -16,6 +17,8 @@ namespace SnakeLadderQuiz.Desktop
         private Game1 _game1;
         private int _startPlayerId = 0;
         private int _nextPlayerId = 0;
+        private int? _lastGroupId = 0;
+        private int? _lastSoalId = 0;
 
         //public FormMain(Game1 game1)
         public FormMain()
@@ -95,35 +98,125 @@ namespace SnakeLadderQuiz.Desktop
 
         private void cmdStart_Click(object sender, EventArgs e)
         {
-            if (_game1 != null)
+            ShowQuestionToPlayer();
+
+            if (_game1 == null) return;
+          
+            ResetBackColorTextPlayerName();
+            
+            SetNextPlayerId();
+
+            lblDiceNumber.Text = new Random().Next(1, 13).ToString();
+
+            
+
+            _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
+
+            _game1.RaiseStart = true;
+            cmdStart.Enabled = false;        
+        }
+
+        private int RandomSoalId(List<Soal> soals)
+        {
+            int result = 0;
+            int jmlSoal = soals.Count;
+
+            int randSoal = new Random().Next(1, jmlSoal + 1);
+            randSoal = soals[randSoal - 1].Soal_Id;
+
+            if (randSoal == _lastSoalId.Value)
             {
-                ResetBackColorTextPlayerName();
-                var namePlayer = "";
-               
-                if (_game1.players.All(i => i.Position == 0))
+                if (jmlSoal == 1)
                 {
-                    _startPlayerId = new Random().Next(0, 5);
-                    
-                    SetTextBoxBackColorTomatoByPlayerId(_startPlayerId, out namePlayer);
+                    result = randSoal;
+                }
+                else if (jmlSoal > 1)
+                {
+                    result = RandomSoalId(soals);
+                }
+            }
+            else {
+                result = randSoal;
+                _lastSoalId = randSoal;
+            }
+            return result;
+        }
 
-                    _game1.StartPlayerId = _startPlayerId;
-                    _game1.RaiseReset = true;
-                    MessageBox.Show("Player " + (_startPlayerId + 1) + " " + namePlayer + " first");
-                    _game1.RaiseReset = false;
+        private int RandomGroupId(List<Group_Soal> groups) {
+            int result = 0;
+            int jmlGroup = groups.Count;
 
-                    _nextPlayerId = _startPlayerId;
+            int randGroup = new Random().Next(1, jmlGroup + 1);
+            randGroup = groups[randGroup - 1].gs_id;
+
+            if (randGroup == _lastGroupId.Value)
+            {
+                if (jmlGroup == 1)
+                {
+                    result = randGroup;
+                }
+                else if (jmlGroup > 1)
+                {
+                    result = RandomGroupId(groups);
+                }
+            }
+            else {
+                result = randGroup;
+                _lastGroupId = randGroup;
+            }
+
+            return result;
+        }
+
+        private void ShowQuestionToPlayer() {
+            // jika group > 0
+            List<Group_Soal> groups = Program.factory.GetGroupSoal().GetAll();
+            if (groups.Count > 0)
+            {
+                int randGroupId = RandomGroupId(groups);
+
+                // count soal by group_id
+                List<Soal> soals = Program.factory.GetSoal().GetByGroupId(randGroupId);
+                // jika soal > 0
+                if (soals.Count > 0)
+                {
+                    int randSoalId = RandomSoalId(soals);
+
+                    //show dialog soal
                 }
                 else {
-                    _nextPlayerId += 1;
-                    if (_nextPlayerId == 5) _nextPlayerId = 0;
-                    SetTextBoxBackColorTomatoByPlayerId(_nextPlayerId, out namePlayer);
-                }              
+                    // else jika soal = 0 
+                    MessageBox.Show("No question on database, player permit to continue");
+                }
+            }
+            else {
+                // else jika group = 0
+                MessageBox.Show("No question group tag on database, player permit to continue");
+            }
+        }
 
-                lblDiceNumber.Text = new Random().Next(1, 13).ToString();
-                _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
+        private bool SoalAda() {
 
-                _game1.RaiseStart = true;
-                cmdStart.Enabled = false;
+            return false;
+        }
+
+        private void SetNextPlayerId() {
+            var namePlayer = "";
+            if (_game1.players.All(i => i.Position == 0))
+            {
+                _startPlayerId = new Random().Next(0, 5);
+                SetTextBoxBackColorTomatoByPlayerId(_startPlayerId, out namePlayer);
+                _game1.StartPlayerId = _startPlayerId;
+                _game1.RaiseReset = true;
+                MessageBox.Show("Player " + (_startPlayerId + 1) + " " + namePlayer + " first");
+                _game1.RaiseReset = false;
+                _nextPlayerId = _startPlayerId;
+            }
+            else
+            {
+                _nextPlayerId += 1;
+                if (_nextPlayerId == 5) _nextPlayerId = 0;
+                SetTextBoxBackColorTomatoByPlayerId(_startPlayerId, out namePlayer);
             }
         }
 
