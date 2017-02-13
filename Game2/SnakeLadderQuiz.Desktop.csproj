@@ -65,6 +65,12 @@
     <Compile Include="FormPilihGroup.Designer.cs">
       <DependentUpon>FormPilihGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormShowQuiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowQuiz.Designer.cs">
+      <DependentUpon>FormShowQuiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPilihGroup.resx">
       <DependentUpon>FormPilihGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowQuiz.resx">
+      <DependentUpon>FormShowQuiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
