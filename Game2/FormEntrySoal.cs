@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using SnakeLadderQuiz.Data.Entities;
 
 namespace SnakeLadderQuiz.Desktop
@@ -173,7 +172,10 @@ namespace SnakeLadderQuiz.Desktop
         private void cmdAddMultiple_Click(object sender, EventArgs e)
         {
             if (!rbMultiple.Checked) return;
-            string entryItemMultiple = Interaction.InputBox("Isi pilihan Multiple", "Isi pilihan Multiple");
+
+            string entryItemMultiple="";
+            Program.ShowInputDialog(ref entryItemMultiple, "Isi pilihan Multiple",this);
+            //Interaction.InputBox("Isi pilihan Multiple", "Isi pilihan Multiple");
             if (string.IsNullOrEmpty(entryItemMultiple)) return;
 
             if (Pilihans.Count == 0)

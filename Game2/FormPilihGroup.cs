@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using SnakeLadderQuiz.Data.Entities;
 
 namespace SnakeLadderQuiz.Desktop
@@ -54,7 +53,8 @@ namespace SnakeLadderQuiz.Desktop
 
         private void cmdAddGroup_Click(object sender, EventArgs e)
         {
-            string entryGroupName = Interaction.InputBox("Isi nama Group", "Isi nama Group");
+            string entryGroupName = "";
+            Program.ShowInputDialog(ref entryGroupName, "Entri nama Group",this);
             if (!string.IsNullOrEmpty(entryGroupName))
             {
                 if (Program.factory.GetGroupSoal().NameExist(entryGroupName))
