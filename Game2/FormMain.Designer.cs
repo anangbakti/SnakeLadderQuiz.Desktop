@@ -140,6 +140,7 @@
             this.txtPlayer1Name.Name = "txtPlayer1Name";
             this.txtPlayer1Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer1Name.TabIndex = 7;
+            this.txtPlayer1Name.Text = "a";
             // 
             // txtPlayer2Name
             // 
@@ -149,6 +150,7 @@
             this.txtPlayer2Name.Name = "txtPlayer2Name";
             this.txtPlayer2Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer2Name.TabIndex = 8;
+            this.txtPlayer2Name.Text = "b";
             // 
             // txtPlayer3Name
             // 
@@ -157,6 +159,7 @@
             this.txtPlayer3Name.Name = "txtPlayer3Name";
             this.txtPlayer3Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer3Name.TabIndex = 9;
+            this.txtPlayer3Name.Text = "c";
             // 
             // txtPlayer4Name
             // 
@@ -165,6 +168,7 @@
             this.txtPlayer4Name.Name = "txtPlayer4Name";
             this.txtPlayer4Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer4Name.TabIndex = 10;
+            this.txtPlayer4Name.Text = "d";
             // 
             // txtPlayer5Name
             // 
@@ -173,6 +177,7 @@
             this.txtPlayer5Name.Name = "txtPlayer5Name";
             this.txtPlayer5Name.Size = new System.Drawing.Size(216, 31);
             this.txtPlayer5Name.TabIndex = 11;
+            this.txtPlayer5Name.Text = "e";
             // 
             // label6
             // 

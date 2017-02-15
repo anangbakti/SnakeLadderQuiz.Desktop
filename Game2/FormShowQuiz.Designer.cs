@@ -32,11 +32,11 @@
             this.layoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.txtSoal = new System.Windows.Forms.TextBox();
             this.cmdJawab = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.layoutPanelJawab = new System.Windows.Forms.TableLayoutPanel();
             this.txtJawab = new System.Windows.Forms.TextBox();
             this.lbJawabGanda = new System.Windows.Forms.ListBox();
             this.layoutPanelMain.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.layoutPanelJawab.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblGroup
@@ -56,7 +56,7 @@
             this.layoutPanelMain.Controls.Add(this.lblGroup, 0, 0);
             this.layoutPanelMain.Controls.Add(this.txtSoal, 0, 1);
             this.layoutPanelMain.Controls.Add(this.cmdJawab, 0, 3);
-            this.layoutPanelMain.Controls.Add(this.tableLayoutPanel1, 0, 2);
+            this.layoutPanelMain.Controls.Add(this.layoutPanelJawab, 0, 2);
             this.layoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.layoutPanelMain.Name = "layoutPanelMain";
@@ -90,21 +90,22 @@
             this.cmdJawab.TabIndex = 2;
             this.cmdJawab.Text = "OK";
             this.cmdJawab.UseVisualStyleBackColor = true;
+            this.cmdJawab.Click += new System.EventHandler(this.cmdJawab_Click);
             // 
-            // tableLayoutPanel1
+            // layoutPanelJawab
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.txtJawab, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lbJawabGanda, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 177);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(580, 185);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.layoutPanelJawab.ColumnCount = 2;
+            this.layoutPanelJawab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPanelJawab.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPanelJawab.Controls.Add(this.txtJawab, 0, 0);
+            this.layoutPanelJawab.Controls.Add(this.lbJawabGanda, 1, 0);
+            this.layoutPanelJawab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutPanelJawab.Location = new System.Drawing.Point(3, 177);
+            this.layoutPanelJawab.Name = "layoutPanelJawab";
+            this.layoutPanelJawab.RowCount = 1;
+            this.layoutPanelJawab.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPanelJawab.Size = new System.Drawing.Size(580, 185);
+            this.layoutPanelJawab.TabIndex = 3;
             // 
             // txtJawab
             // 
@@ -137,8 +138,8 @@
             this.Text = "Question";
             this.layoutPanelMain.ResumeLayout(false);
             this.layoutPanelMain.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.layoutPanelJawab.ResumeLayout(false);
+            this.layoutPanelJawab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -149,7 +150,7 @@
         private System.Windows.Forms.TableLayoutPanel layoutPanelMain;
         private System.Windows.Forms.TextBox txtSoal;
         private System.Windows.Forms.Button cmdJawab;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel layoutPanelJawab;
         private System.Windows.Forms.TextBox txtJawab;
         private System.Windows.Forms.ListBox lbJawabGanda;
     }

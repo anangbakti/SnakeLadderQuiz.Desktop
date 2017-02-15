@@ -97,20 +97,22 @@ namespace SnakeLadderQuiz.Desktop
         }
 
         private void cmdStart_Click(object sender, EventArgs e)
-        {
-            ShowQuestionToPlayer();
-
+        {           
             if (_game1 == null) return;
           
-            ResetBackColorTextPlayerName();
-            
+            ResetBackColorTextPlayerName();            
             SetNextPlayerId();
 
-            lblDiceNumber.Text = new Random().Next(1, 13).ToString();
-
-            
-
-            _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
+            if (PlayerAnsweredCorrect())
+            {
+                lblDiceNumber.Text = new Random().Next(1, 13).ToString();
+                _game1.RollTheDice = int.Parse(lblDiceNumber.Text);
+            }
+            else {
+                //wrong answer, no move
+                lblDiceNumber.Text = "0";
+                _game1.RollTheDice = 0;
+            }         
 
             _game1.RaiseStart = true;
             cmdStart.Enabled = false;        
@@ -168,7 +170,7 @@ namespace SnakeLadderQuiz.Desktop
             return result;
         }
 
-        private void ShowQuestionToPlayer() {
+        private bool PlayerAnsweredCorrect() {
             // jika group > 0
             List<Group_Soal> groups = Program.factory.GetGroupSoal().GetAll();
             if (groups.Count > 0)
@@ -183,15 +185,29 @@ namespace SnakeLadderQuiz.Desktop
                     int randSoalId = RandomSoalId(soals);
 
                     //show dialog soal
+                    var groupSoal = Program.factory.GetGroupSoal().GetBySoalId(randSoalId)[0];
+                    var soal = Program.factory.GetSoal().GetById(randSoalId);
+                    var multiples = Program.factory.GetSoalPilihanMultiple().GetBySoalId(randSoalId);
+
+                    var frmShowQuiz = new FormShowQuiz(groupSoal, soal, multiples);
+                    frmShowQuiz.ShowDialog(this);
+
+                    if (frmShowQuiz.DialogResult == DialogResult.Yes)
+                    {
+                        return true;
+                    }
+                    else { return false; }
                 }
                 else {
                     // else jika soal = 0 
                     MessageBox.Show("No question on database, player permit to continue");
+                    return true;
                 }
             }
             else {
                 // else jika group = 0
                 MessageBox.Show("No question group tag on database, player permit to continue");
+                return true;
             }
         }
 
@@ -216,7 +232,8 @@ namespace SnakeLadderQuiz.Desktop
             {
                 _nextPlayerId += 1;
                 if (_nextPlayerId == 5) _nextPlayerId = 0;
-                SetTextBoxBackColorTomatoByPlayerId(_startPlayerId, out namePlayer);
+                SetTextBoxBackColorTomatoByPlayerId(_nextPlayerId, out namePlayer);
+                MessageBox.Show("Next is Player " + (_nextPlayerId + 1) + " " + namePlayer );
             }
         }
 
